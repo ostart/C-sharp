@@ -1,0 +1,11 @@
+C:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.deps.json
+C:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.runtimeconfig.json
+C:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.runtimeconfig.dev.json
+C:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.dll
+C:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.pdb
+C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.csprojAssemblyReference.cache
+C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.csproj.CoreCompileInputs.cache
+C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.AssemblyInfoInputs.cache
+C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.AssemblyInfo.cs
+C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.dll
+C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.pdb
