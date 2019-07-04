@@ -1,5 +1,5 @@
 ﻿using System;
-using AlgorithmsDataStructures;
+using AlgorithmsDataStructuresLinkedList;
 
 namespace C_sharp
 {

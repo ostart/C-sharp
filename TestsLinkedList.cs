@@ -1,6 +1,6 @@
 using System;
 
-namespace AlgorithmsDataStructures
+namespace AlgorithmsDataStructuresLinkedList
 {
     public class TestsLinkedList
     {

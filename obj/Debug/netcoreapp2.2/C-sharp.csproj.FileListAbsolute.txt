@@ -9,3 +9,6 @@ C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.Assembl
 C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.AssemblyInfo.cs
 C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.dll
 C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.pdb
+c:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.dll
+c:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.pdb
+c:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\nunit.engine.netstandard.dll
