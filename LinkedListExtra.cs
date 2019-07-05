@@ -2,7 +2,7 @@ using System;
 
 namespace AlgorithmsDataStructuresLinkedList
 {
-    public class ExtraLinkedList
+    public class LinkedListExtra
     {
         public static LinkedList AddTogether(LinkedList list1, LinkedList list2)
         {

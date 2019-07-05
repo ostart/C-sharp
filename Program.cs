@@ -25,7 +25,7 @@ namespace C_sharp
             list2.AddInTail(new Node(5));
             list2.AddInTail(new Node(6));
 
-            var sum = ExtraLinkedList.AddTogether(list1, list2);
+            var sum = LinkedListExtra.AddTogether(list1, list2);
 
             Console.WriteLine("Hello World!");
             Console.WriteLine("The current time is " + DateTime.Now);
