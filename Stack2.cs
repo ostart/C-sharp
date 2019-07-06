@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures
@@ -6,39 +5,39 @@ namespace AlgorithmsDataStructures
 
     public class Stack2<T>
     {
-        private readonly DynArray<T> array;
+        private readonly List<T> list;
         public Stack2()
         {
             // инициализация внутреннего хранилища стека
-            array = new DynArray<T>();
+            list = new List<T>();
         }
 
         public int Size()
         {
             // размер текущего стека		  
-            return array.count;
+            return list.Count;
         }
 
         public T Pop()
         {
             // ваш код
-            if(array.count == 0) return default(T); // null, если стек пустой
-            var head = array.GetItem(0);
-            array.Remove(0);
+            if(Size() == 0) return default(T); // null, если стек пустой
+            var head = list[0];
+            list.RemoveAt(0);
             return head;
         }
 
         public void Push(T val)
         {
             // ваш код
-            array.Insert(val, 0);
+            list.Insert(0, val);
         }
 
         public T Peek()
         {
             // ваш код
-            if (array.count == 0) return default(T); // null, если стек пустой
-            return array.GetItem(0);
+            if (Size() == 0) return default(T); // null, если стек пустой
+            return list[0];
         }
     }
 
