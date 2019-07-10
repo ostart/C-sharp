@@ -12,3 +12,17 @@ C:\Users\yodmin\Documents\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.pdb
 c:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.dll
 c:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.pdb
 c:\Users\yodmin\Documents\Github\C-sharp\bin\Debug\netcoreapp2.2\nunit.engine.netstandard.dll
+d:\Github\C-sharp\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.dll
+d:\Github\C-sharp\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.pdb
+d:\Github\C-sharp\bin\Debug\netcoreapp2.2\nunit.engine.netstandard.dll
+D:\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.deps.json
+D:\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.runtimeconfig.json
+D:\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.runtimeconfig.dev.json
+d:\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.dll
+d:\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.pdb
+d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.csprojAssemblyReference.cache
+d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.csproj.CoreCompileInputs.cache
+d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.AssemblyInfoInputs.cache
+d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.AssemblyInfo.cs
+d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.dll
+d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.pdb

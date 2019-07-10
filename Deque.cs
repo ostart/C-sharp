@@ -28,6 +28,7 @@ namespace AlgorithmsDataStructures
         public T RemoveFront()
         {
             // удаление из головы
+            if(Size() == 0) return default(T);
             var head = list.First.Value;
             list.RemoveFirst();
             return head;
@@ -36,7 +37,7 @@ namespace AlgorithmsDataStructures
         public T RemoveTail()
         {
             // удаление из хвоста
-            //return default(T);
+            if(Size() == 0) return default(T);
             var tail = list.Last.Value;
             list.RemoveLast();
             return tail;

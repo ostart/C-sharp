@@ -25,7 +25,9 @@ namespace Tests
             head = deque.RemoveFront();
             Assert.AreEqual(1, head, "TestAddFront head must be 1, but not");
             Assert.AreEqual(0, deque.Size(), "TestSize must be 0, but not");
-            Assert.Throws<NullReferenceException>(() => deque.RemoveFront());
+            head = deque.RemoveFront();
+            Assert.AreEqual(0, head, "TestAddFront head must be 0, but not");
+            Assert.AreEqual(0, deque.Size(), "TestSize must be 0, but not");
         }
 
         [Test]
@@ -47,7 +49,9 @@ namespace Tests
             tail = deque.RemoveTail();
             Assert.AreEqual(1, tail, "TestAddFront head must be 1, but not");
             Assert.AreEqual(0, deque.Size(), "TestSize must be 0, but not");
-            Assert.Throws<NullReferenceException>(() => deque.RemoveTail());
+            tail = deque.RemoveTail();
+            Assert.AreEqual(0, tail, "TestAddFront head must be 0, but not");
+            Assert.AreEqual(0, deque.Size(), "TestSize must be 0, but not");
         }
 
         [Test]
