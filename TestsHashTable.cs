@@ -56,6 +56,10 @@ namespace Tests
             hashTable2.Put("2");
             hashTable2.Put("3");
             Assert.AreEqual(-1, hashTable2.Put("4"));
+
+            var hashTable3 = new HashTable(19,3);
+            for(var i = 1; i <= 100; i++)
+                Assert.DoesNotThrow(() => hashTable3.Put(i.ToString()));
         }
 
         [Test]

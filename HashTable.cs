@@ -38,7 +38,7 @@ namespace AlgorithmsDataStructures
             do
             {
                 current += step;
-                if (slots[current % size] == null) return current;
+                if (slots[current % size] == null) return current % size;
             } while (current % size != initIndex);
 
             return -1;
@@ -67,7 +67,7 @@ namespace AlgorithmsDataStructures
             do
             {
                 current += step;
-                if (slots[current % size] == value) return current;
+                if (slots[current % size] == value) return current % size;
             } while (current % size != initIndex);
 
             return -1;
