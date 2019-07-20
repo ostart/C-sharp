@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AlgorithmsDataStructures
 {
@@ -18,7 +17,12 @@ namespace AlgorithmsDataStructures
         public int Size()
         {
             // количество элементов в множестве
-            return slots.Count(slot => slot != null);
+            var counter = 0;
+            foreach(var slot in slots)
+            {
+                if (slot != null) counter += 1;
+            }
+            return counter;
         }
 
         public void Put(T value)
@@ -51,8 +55,8 @@ namespace AlgorithmsDataStructures
         public PowerSet<T> Intersection(PowerSet<T> set2)
         {
             // пересечение текущего множества и set2
-            var currValues = slots.Where(slot => slot != null);
-            var set2Values = set2.slots.Where(slot => slot != null);
+            var currValues = WhereIsNotNull(slots);
+            var set2Values = WhereIsNotNull(set2.slots);
             var result = new PowerSet<T>();
             foreach (var currValue in currValues)
             {
@@ -64,8 +68,8 @@ namespace AlgorithmsDataStructures
         public PowerSet<T> Union(PowerSet<T> set2)
         {
             // объединение текущего множества и set2
-            var currValues = slots.Where(slot => slot != null);
-            var set2Values = set2.slots.Where(slot => slot != null);
+            var currValues = WhereIsNotNull(slots);
+            var set2Values = WhereIsNotNull(set2.slots);
             var result = new PowerSet<T>();
             foreach (var currValue in currValues)
             {
@@ -83,8 +87,8 @@ namespace AlgorithmsDataStructures
         public PowerSet<T> Difference(PowerSet<T> set2)
         {
             // разница текущего множества и set2
-            var currValues = slots.Where(slot => slot != null);
-            var set2Values = set2.slots.Where(slot => slot != null);
+            var currValues = WhereIsNotNull(slots);
+            var set2Values = WhereIsNotNull(set2.slots);
             var result = new PowerSet<T>();
             foreach (var currValue in currValues)
             {
@@ -98,13 +102,23 @@ namespace AlgorithmsDataStructures
             // возвращает true, если set2 есть
             // подмножество текущего множества,
             // иначе false
-            var currValues = slots.Where(slot => slot != null);
-            var set2Values = set2.slots.Where(slot => slot != null);
+            var currValues = WhereIsNotNull(slots);
+            var set2Values = WhereIsNotNull(set2.slots);
             foreach (var set2Value in set2Values)
             {
                 if (!currValues.Contains(set2Value)) return false;
             }
             return true;
+        }
+
+        private List<string> WhereIsNotNull(string[] slots)
+        {
+            var result = new List<string>();
+            foreach(var slot in slots)
+            {
+                if (slot != null) result.Add(slot);
+            }
+            return result;
         }
     }
 
