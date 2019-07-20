@@ -120,7 +120,7 @@ namespace Tests
             Assert.IsTrue(testPowerSet2.Get(6));
 
             var result = testPowerSet1.Intersection(testPowerSet2);
-            Assert.IsNull(result);
+            Assert.AreEqual(0, result.Size());
         }
 
         [Test]
@@ -262,7 +262,7 @@ namespace Tests
             Assert.IsTrue(testPowerSet2.Get(3));
 
             var result = testPowerSet1.Difference(testPowerSet2);
-            Assert.IsNull(result);
+            Assert.AreEqual(0, result.Size());
         }
 
         [Test]

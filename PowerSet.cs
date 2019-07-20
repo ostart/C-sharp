@@ -62,7 +62,7 @@ namespace AlgorithmsDataStructures
             {
                 if (set2Values.Contains(currValue)) result.Put(currValue);
             }
-            return result.Size() == 0 ? null : result;
+            return result;
         }
 
         public PowerSet<T> Union(PowerSet<T> set2)
@@ -81,7 +81,7 @@ namespace AlgorithmsDataStructures
                 var obj = (T)Convert.ChangeType(value, typeof(T));
                 result.Put(obj);
             }
-            return result.Size() == 0 ? null : result;
+            return result;
         }
 
         public PowerSet<T> Difference(PowerSet<T> set2)
@@ -94,7 +94,7 @@ namespace AlgorithmsDataStructures
             {
                 if (!set2Values.Contains(currValue)) result.Put(currValue);
             }
-            return result.Size() == 0 ? null : result;
+            return result;
         }
 
         public bool IsSubset(PowerSet<T> set2)
