@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using AlgorithmsDataStructures;
+using AlgorithmsDataStructuresHashTable;
 
 namespace Tests
 {
