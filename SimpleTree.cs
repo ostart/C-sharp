@@ -40,7 +40,13 @@ namespace AlgorithmsDataStructures2
         {
             // ваш код удаления существующего узла NodeToDelete
             NodeToDelete.Parent.Children.Remove(NodeToDelete);
-            NodeToDelete.Parent = null;
+            if(NodeToDelete.Children != null)
+            {
+                foreach(var item in NodeToDelete.Children)
+                    item.Parent = NodeToDelete.Parent;
+                NodeToDelete.Parent.Children.AddRange(NodeToDelete.Children);
+            }
+            NodeToDelete.Parent = null;   
         }
 
         public List<SimpleTreeNode<T>> GetAllNodes()
