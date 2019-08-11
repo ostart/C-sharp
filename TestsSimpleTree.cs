@@ -116,6 +116,25 @@ namespace Tests
         }
 
         [Test]
+        public static void TestCountAndLeafCount()
+        {
+            var root = new SimpleTreeNode<int>(1, null);
+            var node = new SimpleTreeNode<int>(2, root);
+            root.Children = new List<SimpleTreeNode<int>> { node };
+            var node3 = new SimpleTreeNode<int>(3, root);
+            root.Children.Add(node3);
+            var node4 = new SimpleTreeNode<int>(4, root);
+            root.Children.Add(node4);
+            var tree = new SimpleTree<int>(root);
+
+            var count = tree.Count();
+            Assert.AreEqual(4, count);
+
+            var leafCount = tree.LeafCount();
+            Assert.AreEqual(3, leafCount);
+        }
+
+        [Test]
         public static void TestCalcLevelAllNodes()
         {
             var root = new SimpleTreeNode<int>(1, null);
