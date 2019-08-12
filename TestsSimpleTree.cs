@@ -35,6 +35,35 @@ namespace Tests
             Assert.AreEqual(true, root.Children.Contains(node3));
             Assert.AreEqual(true, root.Children.Contains(node4));
         }
+        
+        [Test]
+        public static void TestDeleteLeafFromTree()
+        {
+            var root = new SimpleTreeNode<int>(1, null);
+            var tree = new SimpleTree<int>(root);
+            var node2 = new SimpleTreeNode<int>(2, root);
+            tree.AddChild(root, node2);
+            var node3 = new SimpleTreeNode<int>(3, root);
+            tree.AddChild(root, node3);
+            var node4 = new SimpleTreeNode<int>(4, node3); 
+            tree.AddChild(node3, node4);
+            var count = tree.Count();
+            var leafCount = tree.LeafCount();
+            Assert.AreEqual(4, count);
+            Assert.AreEqual(2, leafCount);
+
+            tree.DeleteNode(node4);
+
+            count = tree.Count();
+            leafCount = tree.LeafCount();
+            Assert.AreEqual(3, count);
+            Assert.AreEqual(2, leafCount);
+
+            Assert.AreEqual(true, root.Children.Contains(node2));
+            Assert.AreEqual(true, root.Children.Contains(node3));
+            Assert.IsNull(node3.Children);
+        }
+
         [Test]
         public static void TestGetAllNodes()
         {
