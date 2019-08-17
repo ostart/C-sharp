@@ -115,37 +115,37 @@ namespace AlgorithmsDataStructures2
                 return true;
             }
 
-            var min = FinMinMax(node.Node.RightChild, false);
-            if (min.RightChild != null) // если есть у min ветка (RightChild) с большим значением
+            var minLeft = FinMinMax(node.Node.RightChild, false);
+            if (minLeft.RightChild != null) // если есть у min ветка (RightChild) с большим значением
             {
-                min.Parent.LeftChild = min.RightChild;
-                min.RightChild.Parent = min.Parent;
+                minLeft.Parent.LeftChild = minLeft.RightChild;
+                minLeft.RightChild.Parent = minLeft.Parent;
             }
             else
             {   // отвязываем min узел от родителя
-                if (min.NodeKey < min.Parent.NodeKey)
-                    min.Parent.LeftChild = null;     
+                if (minLeft.NodeKey < minLeft.Parent.NodeKey)
+                    minLeft.Parent.LeftChild = null;     
             }          
             if (node.Node.Parent.NodeKey < node.Node.NodeKey)
-                node.Node.Parent.RightChild = min;
+                node.Node.Parent.RightChild = minLeft;
             else
-                node.Node.Parent.LeftChild = min;
-            min.Parent = node.Node.Parent;
-            if (min == node.Node.RightChild)
-                min.RightChild = null;
+                node.Node.Parent.LeftChild = minLeft;
+            minLeft.Parent = node.Node.Parent;
+            if (minLeft == node.Node.RightChild)
+                minLeft.RightChild = null;
             else
             {
-                min.RightChild =  node.Node.RightChild;
+                minLeft.RightChild =  node.Node.RightChild;
                 if (node.Node.RightChild != null)
-                    node.Node.RightChild.Parent = min;
+                    node.Node.RightChild.Parent = minLeft;
             }
-            if (min == node.Node.LeftChild)
-                min.LeftChild = null;
+            if (minLeft == node.Node.LeftChild)
+                minLeft.LeftChild = null;
             else
             {
-                min.LeftChild = node.Node.LeftChild;
+                minLeft.LeftChild = node.Node.LeftChild;
                 if (node.Node.LeftChild != null)
-                    node.Node.LeftChild.Parent = min;
+                    node.Node.LeftChild.Parent = minLeft;
             }
             return true;
         }
@@ -164,6 +164,75 @@ namespace AlgorithmsDataStructures2
                 CalcCount(node.LeftChild, ref counter);
             if (node.RightChild != null)
                 CalcCount(node.RightChild, ref counter);
+        }
+
+        public List<BSTNode<T>> WideAllNodes()
+        {
+            var result = new List<BSTNode<T>>();
+            FillWideAllNodes(new List<BSTNode<T>>{ Root }, result);
+            return result;
+        }
+
+        private static void FillWideAllNodes(List<BSTNode<T>> nodes, List<BSTNode<T>> result)
+        {
+            if (nodes.Count == 0) return;
+            result.AddRange(nodes);
+            var nodesBelow = new List<BSTNode<T>>();
+            foreach (BSTNode<T> bstNode in nodes)
+            {
+                if (bstNode.LeftChild != null) nodesBelow.Add(bstNode.LeftChild);
+                if (bstNode.RightChild != null) nodesBelow.Add(bstNode.RightChild);
+            }
+            if (nodesBelow.Count == 0) return;
+            FillWideAllNodes(nodesBelow, result);
+        }
+
+        public List<BSTNode<T>> DeepAllNodes(int order) // 0 (in-order), 1 (post-order) и 2 (pre-order)
+        {
+            var result = new List<BSTNode<T>>();
+            switch (order)
+            {
+                case 0:
+                    FillDeepAllNodesInOrder(Root, result);
+                    break;
+                case 1:
+                    FillDeepAllNodesPostOrder(Root, result);
+                    break;
+                case 2:
+                    FillDeepAllNodesPreOrder(Root, result);
+                    break;
+                default:
+                    FillDeepAllNodesInOrder(Root, result);
+                    break;
+            }            
+            return result;
+        }
+
+        private static void FillDeepAllNodesPreOrder(BSTNode<T> node, List<BSTNode<T>> result) // current, left-recurse, right-recurse
+        {
+            result.Add(node);
+            if (node.LeftChild != null)
+                FillDeepAllNodesPreOrder(node.LeftChild, result);
+            if (node.RightChild != null)
+                FillDeepAllNodesPreOrder(node.RightChild, result);
+        }
+
+        private static void FillDeepAllNodesPostOrder(BSTNode<T> node, List<BSTNode<T>> result) // left-recurse, right-recurse, current
+        {
+            if (node.LeftChild != null)
+                FillDeepAllNodesPostOrder(node.LeftChild, result);
+            if (node.RightChild != null)
+                FillDeepAllNodesPostOrder(node.RightChild, result);
+            result.Add(node);
+        }
+
+        private static void FillDeepAllNodesInOrder(BSTNode<T> node, List<BSTNode<T>> result) // left-recurse, current, right-recurse
+        {
+            if (node.LeftChild != null)
+                FillDeepAllNodesInOrder(node.LeftChild, result);
+            result.Add(node);
+            if (node.RightChild != null)
+                FillDeepAllNodesInOrder(node.RightChild, result);
         }
     }
 }

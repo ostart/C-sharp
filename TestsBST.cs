@@ -266,5 +266,53 @@ namespace Tests
             Assert.AreEqual(false, result.NodeHasKey);
             Assert.AreEqual(false, result.ToLeft);
         }
+
+        [Test]
+        public void TestWideAllNodes()
+        {
+            var result = _tree.WideAllNodes();
+            Assert.AreEqual(9, result.Count);
+            int[] mas = {9, 4, 17, 3, 6, 22, 5, 7, 20};
+            for (var i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(mas[i], result[i].NodeKey);
+            }
+        }
+
+        [Test]
+        public void TestDeepAllNodesInOrder()
+        {
+            var result = _tree.DeepAllNodes(0);
+            Assert.AreEqual(9, result.Count);
+            int[] mas = { 3, 4, 5, 6, 7, 9, 17, 20, 22 };
+            for (var i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(mas[i], result[i].NodeKey);
+            }
+        }
+
+        [Test]
+        public void TestDeepAllNodesPostOrder()
+        {
+            var result = _tree.DeepAllNodes(1);
+            Assert.AreEqual(9, result.Count);
+            int[] mas = { 3, 5, 7, 6, 4, 20, 22, 17, 9 };
+            for (var i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(mas[i], result[i].NodeKey);
+            }
+        }
+
+        [Test]
+        public void TestDeepAllNodesPreOrder()
+        {
+            var result = _tree.DeepAllNodes(2);
+            Assert.AreEqual(9, result.Count);
+            int[] mas = { 9, 4, 3, 6, 5, 7, 17, 22, 20 };
+            for (var i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(mas[i], result[i].NodeKey);
+            }
+        }
     }
 }
