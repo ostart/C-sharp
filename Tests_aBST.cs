@@ -58,10 +58,10 @@ namespace Tests
         [Test]
         public void TestAddKey()
         {
-            Assert.AreEqual(-1, _tree.AddKey(50));
-            Assert.AreEqual(-1, _tree.AddKey(25));
-            Assert.AreEqual(-1, _tree.AddKey(62));
-            Assert.AreEqual(-1, _tree.AddKey(92));
+            Assert.AreEqual(0, _tree.AddKey(50));
+            Assert.AreEqual(1, _tree.AddKey(25));
+            Assert.AreEqual(5, _tree.AddKey(62));
+            Assert.AreEqual(14, _tree.AddKey(92));
             Assert.AreEqual(3, _tree.AddKey(24));
             Assert.AreEqual(13, _tree.AddKey(83));
         }

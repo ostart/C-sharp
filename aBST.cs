@@ -37,18 +37,19 @@ namespace AlgorithmsDataStructures2
 
     public int AddKey(int key)
     {
-      // добавляем ключ в массив
-      var index = FindKeyIndex(key);
-      if(index == null || index > 0) return -1;
-      if(index == 0) 
-      {
-          var currentValue = Tree[0];
-          if(currentValue != null) return -1;
-      }
-      // индекс добавленного/существующего ключа или -1 если не удалось
-      var resultIndex = (int) (-1 * index);
-      Tree[resultIndex] = key;
-      return resultIndex;
+        // добавляем ключ в массив
+        var index = FindKeyIndex(key);
+        // индекс добавленного/существующего ключа или -1 если не удалось
+        if (index > 0) return (int)index;
+        if (index == null) return -1;
+        if (index == 0)
+        {
+            var currentValue = Tree[0];
+            if (currentValue != null) return 0;
+        }
+        var resultIndex = (int)(-1 * index);
+        Tree[resultIndex] = key;
+        return resultIndex;
     }	
   }
 }
