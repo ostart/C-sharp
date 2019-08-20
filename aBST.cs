@@ -10,10 +10,10 @@ namespace AlgorithmsDataStructures2
     public aBST(int depth)
     {
       // правильно рассчитайте размер массива для дерева глубины depth:
-      int tree_size = 0;
-      for(int i=0; i<=depth; i++) tree_size += 2 ^ i;
-      Tree = new int?[ tree_size ];
-      for(int i=0; i<tree_size; i++) Tree[i] = null;
+      var tree_size = 0;
+      for (var i = 0; i <= depth; i++) tree_size += (int)Math.Pow(2, i);
+      Tree = new int?[tree_size];
+      for (var i = 0; i < tree_size; i++) Tree[i] = null;
     }
 	
     public int? FindKeyIndex(int key)
