@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-      public class BSTNode
+      public class myBSTNode
       {
         public int NodeKey; // ключ узла
-        public BSTNode Parent; // родитель или null для корня
-        public BSTNode LeftChild; // левый потомок
-        public BSTNode RightChild; // правый потомок	
+        public myBSTNode Parent; // родитель или null для корня
+        public myBSTNode LeftChild; // левый потомок
+        public myBSTNode RightChild; // правый потомок	
         public int     Level; // глубина узла
 	
-        public BSTNode(int key, BSTNode parent)
+        public myBSTNode(int key, myBSTNode parent)
          {
             NodeKey = key;
             Parent = parent;
@@ -21,13 +21,13 @@ namespace AlgorithmsDataStructures2
         }	
 
 
-	public class BalancedBST
+	public class myBalancedBST
 	{
-		public BSTNode Root;
+		public myBSTNode Root;
 		
 		public int [] BSTArray; // временный массив для ключей дерева
 		
-		public BalancedBST() 
+		public myBalancedBST() 
 		{ 
 			Root = null;
 		}
@@ -35,40 +35,34 @@ namespace AlgorithmsDataStructures2
 		public void CreateFromArray(int[] a) 
 		{  
 			// создаём массив дерева BSTArray из заданного
-			Array.Sort(a);
-            var result = new int[a.Length];
-            ParseArray(a, result, -1, true);
-            BSTArray = result;
-		}			
+            BSTArray = a;
+			Array.Sort(BSTArray);
+		}		
 			
 		public void GenerateTree() 
 		{  
 			// создаём дерево с нуля из массива BSTArray
-			Root = GenerateNode(null, null, false, 1);
+			Root = CreateNode(BSTArray, 1, null);
 		}
 
-        private BSTNode GenerateNode(int? parentIndex, BSTNode parentNode, bool isRight, int level)
+        private myBSTNode CreateNode(int[] array, int level, myBSTNode parent)
         {
-            if(parentIndex == null)
-            {
-                var root = new BSTNode(BSTArray[0], null);
-                root.Level = level;
-                root.LeftChild = GenerateNode(0, root, false, level+1);
-                root.RightChild = GenerateNode(0, root, true, level+1);
-                return root;
-            }
-            var currentIndex = isRight ? 2*(int)parentIndex + 2 : 2*(int)parentIndex + 1;
-            if(currentIndex >= BSTArray.Length) return null;
-            var node = new BSTNode(BSTArray[currentIndex], parentNode);
+            var center = array.Length / 2;
+            var node = new myBSTNode(array[center], parent);
             node.Level = level;
-            node.LeftChild = GenerateNode(currentIndex, node, false, level+1);
-            node.RightChild = GenerateNode(currentIndex, node, true, level+1);
+            if (center == 0) return node;
+            var left = new int[center];
+            var right = new int[center];
+            Array.Copy(array, left, center);
+            Array.Copy(array, center + 1, right, 0, center);
+            node.LeftChild = CreateNode(left, level + 1, node);
+            node.RightChild = CreateNode(right, level + 1, node);
             return node;
         }
 
-        public bool IsBalanced(BSTNode root_node) 
+        public bool IsBalanced(myBSTNode root_node) 
 		{  
-			if(root_node == null) return true;
+            if(root_node == null) return true;
 			if(root_node.LeftChild == null && root_node.RightChild == null) return true;
             var leftBalanced = IsBalanced(root_node.LeftChild);
             var rightBalanced = IsBalanced(root_node.RightChild);
@@ -78,21 +72,7 @@ namespace AlgorithmsDataStructures2
             return leftBalanced && rightBalanced && correctLeftRigthDepth;
 		}
 
-        private static void ParseArray(int[] inputArray, int[] result, int parentIndex, bool isRight)
-        {
-            var center = inputArray.Length / 2;
-            var currentIndex = isRight ? (2*parentIndex + 2) : (2*parentIndex + 1);
-            result[currentIndex] = inputArray[center];
-            if (center == 0) return;
-            var left = new int[center];
-            var right = new int[center];
-            Array.Copy(inputArray, left, center);
-            Array.Copy(inputArray, center + 1, right, 0, center);
-            ParseArray(left, result, currentIndex, false);
-            ParseArray(right, result, currentIndex, true);
-        }
-
-        private int GetMaxDepth(BSTNode node, bool isRight)
+        private int GetMaxDepth(myBSTNode node, bool isRight)
         {
             if(isRight)
             {
@@ -110,7 +90,7 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        private void RecursiveMaxDepthCheck(BSTNode node, int currentDepth, ref int maxDepth)
+        private void RecursiveMaxDepthCheck(myBSTNode node, int currentDepth, ref int maxDepth)
         {
             if(node.LeftChild == null && node.RightChild == null)
             {
@@ -122,5 +102,5 @@ namespace AlgorithmsDataStructures2
             if(node.RightChild != null)
                 RecursiveMaxDepthCheck(node.RightChild, currentDepth + 1, ref maxDepth);
         }
-	}
-} 
+    }
+}  
