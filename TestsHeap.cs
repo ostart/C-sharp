@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using AlgorithmsDataStructures2;
 using System.Linq;
-using System;
 
 namespace Tests
 {
@@ -11,7 +10,7 @@ namespace Tests
         public void TestMakeHeap()
         {
             var heap = new Heap();
-            var arr = new int[] {8,7,4,9,11,6,5,2,1,3};
+            var arr = new int[] {8,7,4,9,11,6,5,2,1,3,-1,-1,-1,-1,-1};
             heap.MakeHeap(arr, 3);
             Assert.AreEqual(15, heap.HeapArray.Length);
             var max = heap.HeapArray.Max();
@@ -34,7 +33,7 @@ namespace Tests
         public void TestGetMax()
         {
             var heap = new Heap();
-            var arr = new int[] {8,7,4,9,11,6,5,2,1,3};
+            var arr = new int[] {8,7,4,9,11,6,5,2,1,3,-1,-1,-1,-1,-1};
             heap.MakeHeap(arr, 3);
             Assert.AreEqual(15, heap.HeapArray.Length);
             var max = heap.GetMax();
@@ -43,10 +42,29 @@ namespace Tests
         }
 
         [Test]
+        public void TestGetMaxFalse()
+        {
+            var heap = new Heap();
+            var arr = new int[] {-1,-1,-1,9,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+            heap.MakeHeap(arr, 3);
+            Assert.AreEqual(15, heap.HeapArray.Length);
+            var max = heap.GetMax();
+            Assert.AreEqual(9, max);
+            CheckArray(heap.HeapArray, 0);
+            max = heap.GetMax();
+            Assert.AreEqual(-1, max);
+            Assert.IsTrue(heap.Add(11));
+            CheckArray(heap.HeapArray, 0);
+            max = heap.GetMax();
+            Assert.AreEqual(11, max);
+            CheckArray(heap.HeapArray, 0);
+        }
+
+        [Test]
         public void TestAdd()
         {
             var heap = new Heap();
-            var arr = new int[] {8,7,4,9,11,6,5,2,1,3};
+            var arr = new int[] {8,7,4,9,11,6,5,2,1,3,-1,-1,-1,-1,-1};
             heap.MakeHeap(arr, 3);
             Assert.AreEqual(15, heap.HeapArray.Length);
             Assert.IsTrue(heap.Add(10));

@@ -15,10 +15,12 @@ namespace AlgorithmsDataStructures2
 			// создаём массив кучи HeapArray из заданного
             // размер массива выбираем на основе глубины depth
 			var size = (int)Math.Pow(2, depth + 1) - 1;
-            if(size < a.Length) throw new Exception("Incorrect depth of heap");
+            if(size != a.Length) throw new Exception("Incorrect depth of heap");
             HeapArray = new int[size];
+            for (int i = 0; i < HeapArray.Length; i++) HeapArray[i] = -1;
             foreach (var item in a)
             {
+                if(item < 0) continue;
                 Add(item);
             }
 		}
@@ -27,29 +29,25 @@ namespace AlgorithmsDataStructures2
 		{
 			// вернуть значение корня и перестроить кучу
             if(last == -1) return -1; // если куча пуста
-            var result = HeapArray[0];
+            var top = HeapArray[0];
             //TODO перестраиваем пирамиду
             if(last == 0)
-                HeapArray = null;
+                HeapArray[0] = -1;
             else
             {
                 HeapArray[0] = HeapArray[last];
-                HeapArray[last] = 0;
+                HeapArray[last] = -1;
                 SiftDown(0);
             }
             last -= 1;
-            return result;
+            return top;
 		}
 
         private void SiftDown(int index)
         {
             var left = 2*index+1;
             var right = 2*index+2;
-            int current;
-            if(HeapArray[left] >= HeapArray[right])
-                current = left;
-            else
-                current = right;
+            int current = HeapArray[left] >= HeapArray[right] ? left : right;
             if(HeapArray[index] >= HeapArray[current]) return;
             Swap(index, current);
             SiftDown(current);
