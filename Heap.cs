@@ -29,8 +29,9 @@ namespace AlgorithmsDataStructures2
 		{
 			// вернуть значение корня и перестроить кучу
             if(last == -1) return -1; // если куча пуста
+            if(HeapArray == null || HeapArray.Length == 0) return -1;
             var top = HeapArray[0];
-            //TODO перестраиваем пирамиду
+            //перестраиваем пирамиду
             if(last == 0)
                 HeapArray[0] = -1;
             else
@@ -47,6 +48,7 @@ namespace AlgorithmsDataStructures2
         {
             var left = 2*index+1;
             var right = 2*index+2;
+            if(left >= HeapArray.Length || right >= HeapArray.Length) return;
             int current = HeapArray[left] >= HeapArray[right] ? left : right;
             if(HeapArray[index] >= HeapArray[current]) return;
             Swap(index, current);
@@ -73,6 +75,7 @@ namespace AlgorithmsDataStructures2
         private void SiftUp(int index)
         {
             var parent = (index - 1) / 2;
+            if(parent < 0) return;
             if(HeapArray[parent] >= HeapArray[index]) return;
             Swap(index, parent);
             SiftUp(parent);
