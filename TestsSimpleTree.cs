@@ -190,5 +190,63 @@ namespace Tests
             Assert.AreEqual(2, node3.Level);
             Assert.AreEqual(3, node4.Level);
         }
+
+        [Test]
+        public static void TestEvenTrees()
+        {
+            var root = new SimpleTreeNode<int>(1, null);
+            var tree = new SimpleTree<int>(root);
+            var node2 = new SimpleTreeNode<int>(2, root);
+            tree.AddChild(root, node2);
+            var node3 = new SimpleTreeNode<int>(3, root);
+            tree.AddChild(root, node3);
+            var node6 = new SimpleTreeNode<int>(6, root);
+            tree.AddChild(root, node6);
+            var node5 = new SimpleTreeNode<int>(5, node2);
+            tree.AddChild(node2, node5);
+            var node7 = new SimpleTreeNode<int>(7, node2);
+            tree.AddChild(node2, node7);
+            var node4 = new SimpleTreeNode<int>(4, node3);
+            tree.AddChild(node3, node4);
+            var node8 = new SimpleTreeNode<int>(8, node6);
+            tree.AddChild(node6, node8);
+            var node9 = new SimpleTreeNode<int>(9, node8);
+            tree.AddChild(node8, node9);
+            var node10 = new SimpleTreeNode<int>(10, node8);
+            tree.AddChild(node8, node10);
+            var list = tree.EvenTrees();
+            var ethalon = new List<int> {1,3,1,6};
+            Assert.AreEqual(ethalon.Count, list.Count);
+            for (int i = 0; i < ethalon.Count; i++)
+                Assert.AreEqual(ethalon[i], list[i]);
+        }
+
+        [Test]
+        public static void TestEvenTreesOldTree()
+        {
+            var root = new SimpleTreeNode<int>(9, null);
+            var tree = new SimpleTree<int>(root);
+            var node4 = new SimpleTreeNode<int>(4, root);
+            tree.AddChild(root, node4);
+            var node17 = new SimpleTreeNode<int>(17, root);
+            tree.AddChild(root, node17);
+            var node3 = new SimpleTreeNode<int>(3, node4);
+            tree.AddChild(node4, node3);
+            var node6 = new SimpleTreeNode<int>(6, node4);
+            tree.AddChild(node4, node6);
+            var node5 = new SimpleTreeNode<int>(5, node6);
+            tree.AddChild(node6, node5);
+            var node7 = new SimpleTreeNode<int>(7, node6);
+            tree.AddChild(node6, node7);
+            var node22 = new SimpleTreeNode<int>(22, node17);
+            tree.AddChild(node17, node22);
+            var node20 = new SimpleTreeNode<int>(20, node22);
+            tree.AddChild(node22, node20);
+            var list = tree.EvenTrees();
+            var ethalon = new List<int> {9,17,17,22};
+            Assert.AreEqual(ethalon.Count, list.Count);
+            for (int i = 0; i < ethalon.Count; i++)
+                Assert.AreEqual(ethalon[i], list[i]);
+        }
     }
 }

@@ -169,6 +169,54 @@ namespace AlgorithmsDataStructures2
             if (node.Parent == null) return;
             CalcLevel(node.Parent, ref count);
         }
+
+        public List<int> EvenTrees()
+        {
+            var result = new List<int>();
+            MakeEvenTrees(Root, result);
+            return result;
+        }
+
+        private void MakeEvenTrees(SimpleTreeNode<T> node, List<int> result)
+        {
+            var lengthList = new List<int>();
+            foreach (var child in node.Children)
+            {
+                var counter = 0;
+                CountResult(child, ref counter);
+                lengthList.Add(counter);
+            }
+            if(lengthList.Count == 1 && lengthList[0] % 2 == 1) return;
+            //Ищем максимальную нечетную длину. Она останется с этой вершиной
+            var index = GetMaxOddLengthIndex(lengthList);
+            //Из других будем делать чётные деревья. Разрываем их связь с родительской и рекурсивно MakeEvenTrees
+            for (int i = 0; i < node.Children.Count; i++)
+            {
+                if(i == index) continue;
+                result.Add((int)(object)node.NodeValue);
+                result.Add((int)(object)node.Children[i].NodeValue);
+            }
+            for (int i = 0; i < node.Children.Count; i++)
+            {
+                if(i == index) continue;
+                MakeEvenTrees(node.Children[i], result);
+            } 
+        }
+
+        private int GetMaxOddLengthIndex(List<int> lengthList)
+        {
+            var index = -1;
+            var maxOdd = -1;
+            for (int i = 0; i < lengthList.Count; i++)
+            {
+                if(lengthList[i] % 2 == 1 && lengthList[i] > maxOdd)
+                {
+                    index = i;
+                    maxOdd = lengthList[i];
+                }    
+            }
+            return index;
+        }
     }
 
 }
