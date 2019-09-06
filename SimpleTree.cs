@@ -170,52 +170,58 @@ namespace AlgorithmsDataStructures2
             CalcLevel(node.Parent, ref count);
         }
 
-        public List<int> EvenTrees()
+        public List<T> EvenTrees()
         {
-            var result = new List<int>();
+            var result = new List<T>();
             MakeEvenTrees(Root, result);
             return result;
         }
 
-        private void MakeEvenTrees(SimpleTreeNode<T> node, List<int> result)
+        private void MakeEvenTrees(SimpleTreeNode<T> node, List<T> result)
         {
             var lengthList = new List<int>();
-            foreach (var child in node.Children)
+            if(node.Children == null) return;
+            foreach (var child in node.Children) 
             {
                 var counter = 0;
                 CountResult(child, ref counter);
                 lengthList.Add(counter);
             }
-            if(lengthList.Count == 1 && lengthList[0] % 2 == 1) return;
+
+            //if(lengthList.Count == 1 && lengthList[0] % 2 == 1) return; // Criterion for old variant - minimal forrest. Rest one branch and odd
+            //Old variant - Minimal forrest. Ищем максимальную нечетную длину. Она останется с этой вершиной
+            //var index = GetMaxOddLengthIndex(lengthList); //Old variant - Minimal forrest
+
             //Ищем максимальную нечетную длину. Она останется с этой вершиной
-            var index = GetMaxOddLengthIndex(lengthList);
-            //Из других будем делать чётные деревья. Разрываем их связь с родительской и рекурсивно MakeEvenTrees
+            //Также вершины с одним элементом добавляем в список для игнорирования
+            var ignoredIndexList = GetMaxOddLengthIndexAndOnesIndexes(lengthList); 
+            //Из оставшихся будем делать чётные деревья. Разрываем их связь с родительской
             for (int i = 0; i < node.Children.Count; i++)
             {
-                if(i == index) continue;
-                result.Add((int)(object)node.NodeValue);
-                result.Add((int)(object)node.Children[i].NodeValue);
+                if(ignoredIndexList.Contains(i)) continue;
+                result.Add(node.NodeValue);
+                result.Add(node.Children[i].NodeValue);
             }
-            for (int i = 0; i < node.Children.Count; i++)
-            {
-                if(i == index) continue;
-                MakeEvenTrees(node.Children[i], result);
-            } 
+            //для всех дочерних узлов рекурсивно MakeEvenTrees
+            foreach (var child in node.Children)
+                MakeEvenTrees(child, result);
         }
 
-        private int GetMaxOddLengthIndex(List<int> lengthList)
+        private List<int> GetMaxOddLengthIndexAndOnesIndexes(List<int> lengthList)
         {
-            var index = -1;
+            var result = new List<int>();
             var maxOdd = -1;
             for (int i = 0; i < lengthList.Count; i++)
             {
-                if(lengthList[i] % 2 == 1 && lengthList[i] > maxOdd)
+                if(lengthList[i] == 1)
+                    result.Add(i);
+                else if(lengthList[i] % 2 == 1 && lengthList[i] > maxOdd)
                 {
-                    index = i;
+                    result.Add(i);
                     maxOdd = lengthList[i];
-                }    
+                }
             }
-            return index;
+            return result;
         }
     }
 
