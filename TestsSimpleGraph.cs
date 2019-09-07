@@ -6,13 +6,13 @@ namespace Tests
     class TestsSimpleGraph
     {
         
-        private SimpleGraph _graph;
+        private SimpleGraph<int> _graph;
 
         [SetUp]
         public void TestsSetup()
         {
-            _graph = new SimpleGraph(5);
-            _graph.vertex = new Vertex[] { new Vertex(1), new Vertex(2), new Vertex(3), new Vertex(4), null };
+            _graph = new SimpleGraph<int>(5);
+            _graph.vertex = new Vertex<int>[] { new Vertex<int>(1), new Vertex<int>(2), new Vertex<int>(3), new Vertex<int>(4), null };
             _graph.m_adjacency = new int[,] {
                 {0,1,1,1,0},
                 {1,0,0,1,0},
@@ -88,6 +88,18 @@ namespace Tests
             {
                 Assert.IsFalse(_graph.IsEdge(i,3));
                 Assert.IsFalse(_graph.IsEdge(3,i));
+            }
+        }
+
+        [Test]
+        public void TestDepthFirstSearch()
+        {
+            var result = _graph.DepthFirstSearch(1, 2);
+            Assert.AreEqual(3, result.Count);
+            var ethalon = new int[] {3,1,2};
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(ethalon[i], result[i].Value);
             }
         }
     }
