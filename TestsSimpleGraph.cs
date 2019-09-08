@@ -96,7 +96,7 @@ namespace Tests
         {
             var result = _graph.DepthFirstSearch(1, 2);
             Assert.AreEqual(3, result.Count);
-            var ethalon = new int[] {3,1,2};
+            var ethalon = new int[] {2,1,3};
             for (int i = 0; i < result.Count; i++)
             {
                 Assert.AreEqual(ethalon[i], result[i].Value);

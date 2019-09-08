@@ -88,7 +88,9 @@ namespace AlgorithmsDataStructures2
       }
       BuildDFS(VFrom, VTo, stack);
       // Список пустой, если пути нету.
-      return new List<Vertex<T>>(stack.ToArray());
+      var resultArray = stack.ToArray();
+      Array.Reverse(resultArray);
+      return new List<Vertex<T>>(resultArray);
     }
 
     private void BuildDFS(int currentIndex, int finishIndex, Stack<Vertex<T>> stack)
