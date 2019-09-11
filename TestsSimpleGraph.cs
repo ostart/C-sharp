@@ -102,5 +102,17 @@ namespace Tests
                 Assert.AreEqual(ethalon[i], result[i].Value);
             }
         }
+
+        [Test]
+        public void TestBreadthFirstSearch()
+        {
+            var result = _graph.BreadthFirstSearch(1, 2);
+            Assert.AreEqual(3, result.Count);
+            var ethalon = new int[] {2,1,3};
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(ethalon[i], result[i].Value);
+            }
+        }
     }
 }
