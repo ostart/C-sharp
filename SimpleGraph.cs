@@ -187,5 +187,42 @@ namespace AlgorithmsDataStructures2
         } while (nextIndex != -1);
         return BuildBFS(finishIndex, queue);
     }
+
+    public List<Vertex<T>> WeakVertices()
+    {
+      // возвращает список узлов вне треугольников
+      var result = new List<Vertex<T>>();
+      for (int i = 0; i < max_vertex; i++)
+      {
+        if(vertex[i] == null) continue;
+        if(IsWeakVertex(i))
+          result.Add(vertex[i]);
+      }
+      return result;
+    }
+
+    private bool IsWeakVertex(int currentIndex)
+    {
+      var adjacencyIndexes = GetAdjacencyIndexes(currentIndex);
+      if(adjacencyIndexes.Length < 2) return true;
+      var queue = new Queue<int>(adjacencyIndexes);
+      if(HasAtLeastOneRelated(queue)) return false;
+      return true;
+    }
+
+    private bool HasAtLeastOneRelated(Queue<int> queue)
+    {
+      while(queue.Count > 1)
+      {
+        var current = queue.Dequeue();
+        var array = queue.ToArray();
+        foreach (var item in array)
+        {
+            if(IsEdge(current, item))
+              return true;
+        }
+      }
+      return false;
+    }
   }
 }

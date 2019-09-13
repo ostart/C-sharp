@@ -114,5 +114,26 @@ namespace Tests
                 Assert.AreEqual(ethalon[i], result[i].Value);
             }
         }
+        
+        [Test]
+        public void TestWeakVerticesFalse()
+        {
+            var result = _graph.WeakVertices();
+            Assert.AreEqual(0, result.Count);
+        }
+        
+        [Test]
+        public void TestWeakVerticesTrue()
+        {
+            _graph.AddVertex(5);
+            _graph.AddEdge(3,4);
+            var result = _graph.WeakVertices();
+            Assert.AreEqual(1, result.Count);
+            var ethalon = new int[] {5};
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(ethalon[i], result[i].Value);
+            }
+        }
     }
 }
