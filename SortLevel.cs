@@ -47,5 +47,27 @@ namespace SortSpace
           }
           return flag;
       }
+
+      public static void InsertionSortStep(int[] array, int step, int i)
+      {
+          if(i + step >= array.Length) return;
+          var iterations = 0;
+          var k = i;
+          while(k + step < array.Length)
+          {
+              iterations += 1;
+              k += step;
+          }
+          for (int j = 0; j < iterations; j++)
+          {
+            var l = i;
+            while(l + step < array.Length)
+            {
+                if(array[l] > array[l + step])
+                    Swap(array, l, l + step);
+                l += step;
+            }
+          }
+      }
   }
 }

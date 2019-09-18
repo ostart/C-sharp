@@ -44,5 +44,25 @@ namespace Tests
                 Assert.AreEqual(ethalon[i], _array[i]);
             }
         }
+
+        [Test]
+        public static void TestInsertionSortStep()
+        {
+            var array = new int[] {7,6,5,4,3,2,1};
+            SortLevel.InsertionSortStep(array, 3, 0);
+            var ethalon = new int[] {1,6,5,4,3,2,7};
+            Assert.AreEqual(ethalon.Length, array.Length);
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(ethalon[i], array[i]);
+            }
+            SortLevel.InsertionSortStep(array, 3, 1);
+            var ethalon2 = new int[] {1,3,5,4,6,2,7};
+            Assert.AreEqual(ethalon2.Length, array.Length);
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(ethalon2[i], array[i]);
+            }
+        }
     }
 }
