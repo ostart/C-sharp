@@ -53,12 +53,12 @@ namespace SortSpace
           if(i + step >= array.Length) return;
           var iterations = 0;
           var k = i;
-          while(k + step < array.Length)
+          while(k + step < array.Length) // расчет iterations
           {
               iterations += 1;
               k += step;
           }
-          for (int j = 0; j < iterations; j++)
+          for (int j = 0; j < iterations; j++) // аналог пузырькового метода
           {
             var l = i;
             while(l + step < array.Length)
@@ -69,5 +69,24 @@ namespace SortSpace
             }
           }
       }
-  }
+
+      public static List<int> KnuthSequence(int array_size)
+      {
+          var result = new List<int>();
+          var i = 0;
+          while(CalculateKnuthNumber(i) <= array_size)
+          {
+              result.Add(CalculateKnuthNumber(i));
+              i += 1;
+          }
+          result.Reverse();
+          return result;
+      }
+
+        private static int CalculateKnuthNumber(int i)
+        {
+            if(i == 0) return 1;
+            return 3 * CalculateKnuthNumber(i-1) + 1;
+        }
+    }
 }

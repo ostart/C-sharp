@@ -64,5 +64,17 @@ namespace Tests
                 Assert.AreEqual(ethalon2[i], array[i]);
             }
         }
+
+        [Test]
+        public static void TestKnuthSequence()
+        {
+            var result = SortLevel.KnuthSequence(15);
+            var ethalon = new List<int> {13, 4, 1};
+            Assert.AreEqual(ethalon.Count, result.Count);
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(ethalon[i], result[i]);
+            }
+        }
     }
 }
