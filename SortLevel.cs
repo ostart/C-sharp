@@ -51,26 +51,40 @@ namespace SortSpace
       public static void InsertionSortStep(int[] array, int step, int i)
       {
           if(i + step >= array.Length) return;
+
+          int iterations = CalculateNumberOfIterations(array.Length, step, i);
+
+          var isMadeSwap = true; // для первого раза. аналог пузырькового метода
+          for (int j = 0; j < iterations; j++)
+          {
+              if(!isMadeSwap) return;
+              isMadeSwap = false;
+              var l = i;
+              while(l + step < array.Length)
+              {
+                  if(array[l] > array[l + step])
+                  {
+                      Swap(array, l, l + step);
+                      isMadeSwap = true;
+                  }       
+                  l += step;
+              }
+          }
+      }
+
+      private static int CalculateNumberOfIterations(int arrayLength, int step, int i)
+      {
           var iterations = 0;
           var k = i;
-          while(k + step < array.Length) // расчет iterations
+          while(k + step < arrayLength)
           {
               iterations += 1;
               k += step;
           }
-          for (int j = 0; j < iterations; j++) // аналог пузырькового метода
-          {
-            var l = i;
-            while(l + step < array.Length)
-            {
-                if(array[l] > array[l + step])
-                    Swap(array, l, l + step);
-                l += step;
-            }
-          }
+          return iterations;
       }
 
-      public static List<int> KnuthSequence(int array_size)
+        public static List<int> KnuthSequence(int array_size)
       {
           var result = new List<int>();
           var i = 0;
@@ -83,10 +97,23 @@ namespace SortSpace
           return result;
       }
 
-        private static int CalculateKnuthNumber(int i)
-        {
-            if(i == 0) return 1;
-            return 3 * CalculateKnuthNumber(i-1) + 1;
-        }
+      private static int CalculateKnuthNumber(int i)
+      {
+          if(i == 0) return 1;
+          return 3 * CalculateKnuthNumber(i-1) + 1;
+      }
+
+      public static void ShellSort(int[] array)
+      {
+          var knuthSequence = KnuthSequence(array.Length);
+          foreach (var knuthNumber in knuthSequence)
+          {
+              for (int i = 0; i < knuthNumber; i++)
+              {
+                  var step = knuthNumber == 1 ? knuthNumber : knuthNumber - 1;
+                  InsertionSortStep(array, step, i);
+              }
+          }
+      }
     }
 }
