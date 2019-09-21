@@ -89,5 +89,39 @@ namespace Tests
                 Assert.AreEqual(ethalon[i], array[i]);
             }
         }
+
+        [Test]
+        public static void TestArrayChunk()
+        {
+            var array = new int[] {7,5,6,4,3,1,2};
+            var referenceValueIndex = SortLevel.ArrayChunk(array);
+            Assert.AreEqual(3, referenceValueIndex);
+            var ethalon = new int[] {2,1,3,4,6,5,7};
+            Assert.AreEqual(ethalon.Length, array.Length);
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(ethalon[i], array[i]);
+            }
+
+            var array2 = new int[] {4,5,6,7,3,1,2};
+            var referenceValueIndex2 = SortLevel.ArrayChunk(array2);
+            Assert.AreEqual(3, referenceValueIndex);
+            var ethalon2 = new int[] {1,2,3,4,5,6,7};
+            Assert.AreEqual(ethalon2.Length, array2.Length);
+            for (int i = 0; i < array2.Length; i++)
+            {
+                Assert.AreEqual(ethalon2[i], array2[i]);
+            }
+
+            var array3 = new int[] {4,5,6,3,1,2};
+            var referenceValueIndex3 = SortLevel.ArrayChunk(array3);
+            Assert.AreEqual(3, referenceValueIndex);
+            var ethalon3 = new int[] {2,1,3,4,5,6};
+            Assert.AreEqual(ethalon3.Length, array3.Length);
+            for (int i = 0; i < array3.Length; i++)
+            {
+                Assert.AreEqual(ethalon3[i], array3[i]);
+            }
+        }
     }
 }

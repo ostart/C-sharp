@@ -84,7 +84,7 @@ namespace SortSpace
           return iterations;
       }
 
-        public static List<int> KnuthSequence(int array_size)
+      public static List<int> KnuthSequence(int array_size)
       {
           var result = new List<int>();
           var i = 0;
@@ -114,6 +114,29 @@ namespace SortSpace
                   InsertionSortStep(array, step, i);
               }
           }
+      }
+
+      public static int ArrayChunk(int[] M)
+      {
+          var referenceValueIndex = M.Length / 2;
+          var N = M[referenceValueIndex];
+          var i1 = 0;
+          var i2 = M.Length - 1;
+          for (;;)
+          {
+            if(i1 > referenceValueIndex || i2 < referenceValueIndex) return ArrayChunk(M);
+            if(i1 == i2 || (i1 == i2 - 1 && M[i1] < M[i2]))
+                return referenceValueIndex;
+            if(i1 == i2 - 1 && M[i1] > M[i2])
+            {
+                Swap(M, i1, i2);
+                return ArrayChunk(M);
+            }
+            if(M[i1] >= N && M[i2] <= N)
+                Swap(M, i1, i2);
+            if(M[i1] < N) i1 += 1;
+            if(M[i2] > N) i2 -= 1;
+          } 
       }
     }
 }
