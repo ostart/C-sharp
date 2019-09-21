@@ -105,8 +105,8 @@ namespace Tests
 
             var array2 = new int[] {4,5,6,7,3,1,2};
             var referenceValueIndex2 = SortLevel.ArrayChunk(array2);
-            Assert.AreEqual(3, referenceValueIndex);
-            var ethalon2 = new int[] {1,2,3,4,5,6,7};
+            Assert.AreEqual(6, referenceValueIndex2);
+            var ethalon2 = new int[] {4,5,6,2,3,1,7};
             Assert.AreEqual(ethalon2.Length, array2.Length);
             for (int i = 0; i < array2.Length; i++)
             {
@@ -115,7 +115,7 @@ namespace Tests
 
             var array3 = new int[] {4,5,6,3,1,2};
             var referenceValueIndex3 = SortLevel.ArrayChunk(array3);
-            Assert.AreEqual(3, referenceValueIndex);
+            Assert.AreEqual(5, referenceValueIndex3);
             var ethalon3 = new int[] {2,1,3,4,5,6};
             Assert.AreEqual(ethalon3.Length, array3.Length);
             for (int i = 0; i < array3.Length; i++)
@@ -125,12 +125,22 @@ namespace Tests
 
             var array4 = new int[] {1,3,4,6,5,2,8};
             var referenceValueIndex4 = SortLevel.ArrayChunk(array4);
-            Assert.AreEqual(3, referenceValueIndex);
-            var ethalon4 = new int[] {1,2,3,4,5,6,8};
+            Assert.AreEqual(5, referenceValueIndex4);
+            var ethalon4 = new int[] {1,3,4,2,5,6,8};
             Assert.AreEqual(ethalon4.Length, array4.Length);
             for (int i = 0; i < array4.Length; i++)
             {
                 Assert.AreEqual(ethalon4[i], array4[i]);
+            }
+
+            var array5 = new int[] {1,2,7,4,5};
+            var referenceValueIndex5 = SortLevel.ArrayChunk(array5);
+            Assert.AreEqual(4, referenceValueIndex5);
+            var ethalon5 = new int[] {1,2,5,4,7};
+            Assert.AreEqual(ethalon5.Length, array5.Length);
+            for (int i = 0; i < array5.Length; i++)
+            {
+                Assert.AreEqual(ethalon5[i], array5[i]);
             }
         }
     }

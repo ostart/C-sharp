@@ -124,7 +124,6 @@ namespace SortSpace
           var i2 = M.Length - 1;
           for (;;)
           {
-            if(i1 > referenceValueIndex || i2 < referenceValueIndex) return ArrayChunk(M);
             if(i1 == i2 || (i1 == i2 - 1 && M[i1] < M[i2]))
                 return referenceValueIndex;
             if(i1 == i2 - 1 && M[i1] > M[i2])
@@ -133,7 +132,12 @@ namespace SortSpace
                 return ArrayChunk(M);
             }
             if(M[i1] >= N && M[i2] <= N)
+            {
                 Swap(M, i1, i2);
+                if(i1 == referenceValueIndex || i2 == referenceValueIndex) // перенайти опорный, т.к. после свапа получит другой индекс
+                    referenceValueIndex = Array.FindIndex(M, item => item == N);
+            }
+                
             if(M[i1] < N) i1 += 1;
             if(M[i2] > N) i2 -= 1;
           } 
