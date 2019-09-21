@@ -122,6 +122,16 @@ namespace Tests
             {
                 Assert.AreEqual(ethalon3[i], array3[i]);
             }
+
+            var array4 = new int[] {1,3,4,6,5,2,8};
+            var referenceValueIndex4 = SortLevel.ArrayChunk(array4);
+            Assert.AreEqual(3, referenceValueIndex);
+            var ethalon4 = new int[] {1,2,3,4,5,6,8};
+            Assert.AreEqual(ethalon4.Length, array4.Length);
+            for (int i = 0; i < array4.Length; i++)
+            {
+                Assert.AreEqual(ethalon4[i], array4[i]);
+            }
         }
     }
 }
