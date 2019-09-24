@@ -142,5 +142,42 @@ namespace SortSpace
             if(M[i2] > N) i2 -= 1;
           } 
       }
+
+      public static int ArrayChunk(int[] M, int left, int right)
+      {
+          var referenceValueIndex = left + ((right - left + 1) / 2);
+          var N = M[referenceValueIndex];
+          var i1 = left;
+          var i2 = right;
+          for (;;)
+          {
+            if(i1 == i2 || (i1 == i2 - 1 && M[i1] < M[i2]))
+                return referenceValueIndex;
+            if(i1 == i2 - 1 && M[i1] > M[i2])
+            {
+                Swap(M, i1, i2);
+                return ArrayChunk(M, left, right);
+            }
+            if(M[i1] >= N && M[i2] <= N)
+            {
+                Swap(M, i1, i2);
+                if(i1 == referenceValueIndex || i2 == referenceValueIndex) //перенайти опорный, т.к. после свапа получит другой индекс
+                    referenceValueIndex = Array.FindIndex(M, item => item == N); //это корректно только для неповторяющихся значений в массиве
+            }
+                
+            if(M[i1] < N) i1 += 1;
+            if(M[i2] > N) i2 -= 1;
+          } 
+      }
+
+      public static void QuickSort(int[] array, int left, int right)
+      {
+          if(left >= right) return;
+
+          var N = ArrayChunk(array, left, right); //referenceValueIndex
+
+          QuickSort(array, left, N-1);
+          QuickSort(array, N+1, right);
+      }
     }
 }
