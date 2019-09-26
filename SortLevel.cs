@@ -179,5 +179,15 @@ namespace SortSpace
           QuickSort(array, left, N-1);
           QuickSort(array, N+1, right);
       }
+
+      public static void QuickSortTailOptimization(int[] array, int left, int right)
+      {
+        while (left < right) 
+        {
+            int pivot = ArrayChunk(array, left, right);
+            QuickSortTailOptimization(array, left, pivot - 1);
+            left = pivot + 1;
+        } 
+      }
     }
 }

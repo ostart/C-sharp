@@ -229,5 +229,27 @@ namespace Tests
                 Assert.AreEqual(ethalon2[i], array2[i]);
             }
         }
+
+        [Test]
+        public static void TestQuickSortTailOptimization()
+        {
+            var array = new int[] {15,14,13,12,11,10,9,8,7,6,5,4,3,2,1};
+            SortLevel.QuickSortTailOptimization(array, 0, 14);
+            var ethalon = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+            Assert.AreEqual(ethalon.Length, array.Length);
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(ethalon[i], array[i]);
+            }
+
+            var array2 = new int[] {10,14,3,12,11,1,9,15,7,6,5,4,13,2,8};
+            SortLevel.QuickSortTailOptimization(array2, 0, 14);
+            var ethalon2 = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+            Assert.AreEqual(ethalon2.Length, array2.Length);
+            for (int i = 0; i < array2.Length; i++)
+            {
+                Assert.AreEqual(ethalon2[i], array2[i]);
+            }
+        }
     }
 }
