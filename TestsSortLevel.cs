@@ -251,5 +251,34 @@ namespace Tests
                 Assert.AreEqual(ethalon2[i], array2[i]);
             }
         }
+
+        [Test]
+        public static void TestKthOrderStatisticsStep()
+        {
+            var array = new int[] {3,5,2,4,1};
+            var result = SortLevel.KthOrderStatisticsStep (array, 0, 4, 0);
+            List<int> ethalon = new List<int> {0,3};
+            Assert.AreEqual(ethalon.Count, result.Count);
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(ethalon[i], result[i]);
+            }
+            result = SortLevel.KthOrderStatisticsStep (array, 0, 3, 0);
+            ethalon = new List<int> {0,0};
+            Assert.AreEqual(ethalon.Count, result.Count);
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(ethalon[i], result[i]);
+            }
+
+            var array2 = new int[] {3,5,2,4,1};
+            var result2 = SortLevel.KthOrderStatisticsStep (array2, 0, 4, 4);
+            List<int> ethalon2 = new List<int> {4,4};
+            Assert.AreEqual(ethalon2.Count, result2.Count);
+            for (int i = 0; i < result2.Count; i++)
+            {
+                Assert.AreEqual(ethalon2[i], result2[i]);
+            }
+        }
     }
 }

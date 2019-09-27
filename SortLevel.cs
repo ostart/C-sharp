@@ -143,9 +143,11 @@ namespace SortSpace
           } 
       }
 
-      public static int ArrayChunk(int[] M, int left, int right)
+      public static int ArrayChunk(int[] M, int left, int right, Func<int,int,int> func = default(Func<int,int,int>))
       {
-          var referenceValueIndex = left + ((right - left + 1) / 2);
+          if(func == default(Func<int,int,int>)) func = (x, y) => x + ((y - x + 1) / 2);
+
+          var referenceValueIndex = func(left, right);
           var N = M[referenceValueIndex];
           var i1 = left;
           var i2 = right;
@@ -188,6 +190,15 @@ namespace SortSpace
             QuickSortTailOptimization(array, left, pivot - 1);
             left = pivot + 1;
         } 
+      }
+
+      public static List<int> KthOrderStatisticsStep(int[] Array, int L, int R, int k)
+      {
+          var N = ArrayChunk(Array, L, R, (x,y) => (x + y) / 2);
+
+          if (N == k) return new List<int> {N, N};
+          if (N < k) return new List<int> {N+1, R};
+          else return new List<int> {L, N-1};
       }
     }
 }
