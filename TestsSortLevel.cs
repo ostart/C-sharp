@@ -279,6 +279,44 @@ namespace Tests
             {
                 Assert.AreEqual(ethalon2[i], result2[i]);
             }
+
+            var array1_teacher = new int[] {5,6,7,4,1,2,3};
+            var result1_teacher = SortLevel.KthOrderStatisticsStep (array1_teacher, 0, 6, 0);
+            List<int> ethalon1_teacher = new List<int> {0,2};
+            Assert.AreEqual(ethalon1_teacher.Count, result1_teacher.Count);
+            for (int i = 0; i < result1_teacher.Count; i++)
+            {
+                Assert.AreEqual(ethalon1_teacher[i], result1_teacher[i]);
+            }
+            var result2_teacher = SortLevel.KthOrderStatisticsStep (array1_teacher, 0, 2, 0);
+            var ethalon2_teacher = new List<int> {0,0};
+            Assert.AreEqual(ethalon2_teacher.Count, result2_teacher.Count);
+            for (int i = 0; i < result2_teacher.Count; i++)
+            {
+                Assert.AreEqual(ethalon2_teacher[i], result2_teacher[i]);
+            }
+        }
+
+        [Test]
+        public static void TestMergeSort()
+        {
+            var array = new List<int> {3,5,2,4,1};
+            var result = SortLevel.MergeSort (array);
+            List<int> ethalon = new List<int> {1,2,3,4,5};
+            Assert.AreEqual(ethalon.Count, result.Count);
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(ethalon[i], result[i]);
+            }
+
+            var array2 = new List<int> {10,14,3,12,11,1,9,15,7,6,5,4,13,2,8};
+            var result2 = SortLevel.MergeSort (array2);
+            var ethalon2 = new List<int> {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+            Assert.AreEqual(ethalon2.Count, result2.Count);
+            for (int i = 0; i < result2.Count; i++)
+            {
+                Assert.AreEqual(ethalon2[i], result2[i]);
+            }
         }
     }
 }

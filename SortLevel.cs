@@ -200,5 +200,69 @@ namespace SortSpace
           if (N < k) return new List<int> {N+1, R};
           else return new List<int> {L, N-1};
       }
+
+      public static List<int> MergeSort(List<int> array)
+      {
+          var dividedArray = new List<List<int>>();
+          Divide(array, dividedArray);
+          return Conquer(dividedArray);
+      }
+      private static void Divide(List<int> array, List<List<int>> dividedArray)
+      {
+          if(array.Count == 1) 
+          {
+              dividedArray.Add(array);
+              return;
+          }
+          var newLength = array.Count / 2;
+          Divide(array.GetRange(0, newLength), dividedArray);
+          Divide(array.GetRange(newLength, array.Count - newLength), dividedArray);
+      }
+
+      private static List<int> Conquer(List<List<int>> dividedArray)
+      {
+          while(dividedArray.Count > 1)
+          {
+              var resultArray = new List<List<int>>();
+              var count = dividedArray.Count / 2;
+              var rest = dividedArray.Count % 2;
+              for(int i = 0; i < count; i++)
+              {
+                  resultArray.Add(Merge(dividedArray[2*i],dividedArray[2*i + 1]));
+              }
+              if(rest == 1) resultArray.Add(dividedArray[dividedArray.Count - 1]);
+              dividedArray = resultArray;
+          }
+          return dividedArray[0];
+      }
+
+      private static List<int> Merge(List<int> list1, List<int> list2)
+      {
+          var counter1 = 0;
+          var counter2 = 0;
+          var result = new List<int>();
+
+          while(counter1 < list1.Count && counter2 < list2.Count)
+          {
+            if(list1[counter1] < list2[counter2])
+            {
+                result.Add(list1[counter1]);
+                counter1 += 1;
+            }
+            else
+            {
+                result.Add(list2[counter2]);
+                counter2 += 1;
+            }
+          }
+
+          if(counter1 == list1.Count)
+            result.AddRange(list2.GetRange(counter2, list2.Count - counter2));
+            
+          if(counter2 == list2.Count)
+            result.AddRange(list1.GetRange(counter1, list1.Count - counter1));
+
+          return result;
+      }
     }
 }
