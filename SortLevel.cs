@@ -207,6 +207,7 @@ namespace SortSpace
           Divide(array, dividedArray);
           return Conquer(dividedArray);
       }
+
       private static void Divide(List<int> array, List<List<int>> dividedArray)
       {
           if(array.Count == 1) 
