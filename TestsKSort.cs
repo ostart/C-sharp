@@ -9,7 +9,7 @@ namespace Tests
         [Test]
         public static void TestIndex()
         {
-            var result = new ksort(new string[] {});
+            var result = new KSort();
             var i = result.index("a00");
             Assert.AreEqual(0, i);
 
@@ -30,7 +30,7 @@ namespace Tests
         public static void TestAdd()
         {
             var array = new string[] {"a00", "a01", "b64", "g99", "h99"};
-            var result = new ksort(array);
+            var result = new KSort(array);
 
             Assert.IsFalse(result.add("sdfsdf"));
             Assert.IsFalse(result.add("w23"));

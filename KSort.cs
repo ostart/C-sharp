@@ -4,10 +4,16 @@ using System.Text.RegularExpressions;
 
 namespace SortSpace
 {
-  public class ksort
+  public class KSort
   {
       public string[] items;
-      public ksort(string[] array)
+
+      public KSort()
+      {
+          items = new string[800];
+      }
+
+      public KSort(string[] array)
       {
           items = new string[800];
           foreach (var item in array)
