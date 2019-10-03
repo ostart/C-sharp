@@ -7,7 +7,7 @@ namespace SortSpace
   {
       public int Left;
       public int Right;
-      private int _result; //0-search 1-found 2-not found
+      private int _result; //0-search; 1-found; -1-not found
       private int[] _sortedArray;
 
       public BinarySearch(int[] sortedArray)
