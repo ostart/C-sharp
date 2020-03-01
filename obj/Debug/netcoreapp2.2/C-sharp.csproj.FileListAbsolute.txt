@@ -21,7 +21,6 @@ D:\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.runtimeconfig.dev.json
 d:\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.dll
 d:\Github\C-sharp\bin\Debug\netcoreapp2.2\C-sharp.pdb
 d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.csprojAssemblyReference.cache
-d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.csproj.CoreCompileInputs.cache
 d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.AssemblyInfoInputs.cache
 d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.AssemblyInfo.cs
 d:\Github\C-sharp\obj\Debug\netcoreapp2.2\C-sharp.dll
