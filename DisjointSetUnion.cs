@@ -7,20 +7,20 @@ namespace AlgorithmsDataStructures4
     {
         private readonly Dictionary<T, T> _parent;
         // Ранг дерева >= высоты дерева
-        // private readonly Dictionary<T, int> _rank;
+        private readonly Dictionary<T, int> _rank;
         private readonly Random _rand;
 
         public DSU()
         {
             _parent = new Dictionary<T, T>();
-            // _rank = new Dictionary<T, int>();
+            _rank = new Dictionary<T, int>();
             _rand = new Random();
         }
 
         public void MakeSet(T node)
         {
             _parent.Add(node, node);
-            // _rank.Add(node, 0);
+            _rank.Add(node, 0);
         }
 
         public T Find(T value)
@@ -37,26 +37,31 @@ namespace AlgorithmsDataStructures4
             return topParent;
         }
 
-        public void Unite(T first, T second)
+        public void Unite(T first, T second, bool isTest = false)
         {
             first = Find(first);
             second = Find(second);
 
             if (first.Equals(second)) return;
 
-            if (_rand.Next() % 2 == 0)
-                _parent[first] = second;
+            if (isTest)
+            {
+                if (_rank[first] < _rank[second])
+                    _parent[first] = second;
+                else
+                {
+                    _parent[second] = first;
+                    if (_rank[first] == _rank[second])
+                        ++_rank[first];
+                }
+            }
             else
-                _parent[second] = first;
-            
-            // if (_rank[first] < _rank[second])
-            //     _parent[first] = second;
-            // else
-            // {
-            //     _parent[second] = first;
-            //     if (_rank[first] == _rank[second])
-            //         ++_rank[first];
-            // }
+            {
+                if (_rand.Next() % 2 == 0)
+                    _parent[first] = second;
+                else
+                    _parent[second] = first;
+            }
         }
 
         private T SearchTopParent(T startIndex)
