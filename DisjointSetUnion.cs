@@ -37,14 +37,21 @@ namespace AlgorithmsDataStructures4
             return topParent;
         }
 
-        public void Unite(T first, T second, bool isTest = false)
+        public void Unite(T first, T second, bool isRandom = true)
         {
             first = Find(first);
             second = Find(second);
 
             if (first.Equals(second)) return;
 
-            if (isTest)
+            if (isRandom)
+            {
+                if (_rand.Next() % 2 == 0)
+                    _parent[first] = second;
+                else
+                    _parent[second] = first;
+            }
+            else
             {
                 if (_rank[first] < _rank[second])
                     _parent[first] = second;
@@ -54,13 +61,6 @@ namespace AlgorithmsDataStructures4
                     if (_rank[first] == _rank[second])
                         ++_rank[first];
                 }
-            }
-            else
-            {
-                if (_rand.Next() % 2 == 0)
-                    _parent[first] = second;
-                else
-                    _parent[second] = first;
             }
         }
 

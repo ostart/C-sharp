@@ -13,7 +13,7 @@ namespace AlgoritmTests
             dsu.MakeSet(1);
             dsu.MakeSet(2);
 
-            dsu.Unite(1, 2, true);
+            dsu.Unite(1, 2, isRandom: false);
 
             Assert.That(dsu.Find(1), Is.EqualTo(dsu.Find(2)));
         }
@@ -31,8 +31,8 @@ namespace AlgoritmTests
             Assert.AreEqual(4, dsu.Find(4));
 
 
-            dsu.Unite(1, 4, true);
-            dsu.Unite(3, 5, true);
+            dsu.Unite(1, 4, isRandom: false);
+            dsu.Unite(3, 5, isRandom: false);
 
             Assert.AreEqual(1, dsu.Find(4));
             Assert.AreEqual(1, dsu.Find(1));
@@ -40,7 +40,7 @@ namespace AlgoritmTests
             Assert.AreEqual(3, dsu.Find(5));
             Assert.AreEqual(3, dsu.Find(3));
 
-            dsu.Unite(5, 2, true);
+            dsu.Unite(5, 2, isRandom: false);
 
             Assert.AreEqual(3, dsu.Find(5));
             Assert.AreEqual(3, dsu.Find(3));
