@@ -16,7 +16,7 @@ namespace Tests
             var before = GC.GetTotalMemory(false);
             timer.Start();
 
-            var points = new Point[N];
+            var points = new StepikPoint[N];
             /* 
             
             Это нужно делать, только если Point — класс.
@@ -25,7 +25,7 @@ namespace Tests
             Но даже если этот цикл оставить, код со структурами будет всё равно работать заметно быстрее.
             */
             for (int i = 0; i < points.Length; i++)
-                points[i] = new Point(); 
+                points[i] = new StepikPoint(); 
             var after = GC.GetTotalMemory(false);
             timer.Stop();
 
@@ -51,7 +51,7 @@ namespace Tests
             return (-b / (2 * a)).ToString(); // так можно вернуть строковое представление числа
         }
     }
-    class Point // или class Point
+    class StepikPoint // или class Point
     {
         public int X;
         public int Y;

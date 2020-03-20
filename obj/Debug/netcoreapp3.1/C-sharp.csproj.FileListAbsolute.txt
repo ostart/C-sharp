@@ -90,3 +90,5 @@ D:\Github\C-sharp\obj\Debug\netcoreapp3.1\C-sharp.AssemblyInfo.cs
 D:\Github\C-sharp\obj\Debug\netcoreapp3.1\C-sharp.csproj.CopyComplete
 D:\Github\C-sharp\obj\Debug\netcoreapp3.1\C-sharp.dll
 D:\Github\C-sharp\obj\Debug\netcoreapp3.1\C-sharp.pdb
+D:\Github\C-sharp\obj\Debug\netcoreapp3.1\C-sharp.csproj.CoreCompileInputs.cache
+D:\Github\C-sharp\obj\Debug\netcoreapp3.1\C-sharp.genruntimeconfig.cache
