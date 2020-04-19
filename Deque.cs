@@ -47,6 +47,16 @@ namespace AlgorithmsDataStructures
         {
             return list.Count; // размер очереди
         }
+
+        public T PeekFront()
+        {
+            return list.First.Value;
+        }
+
+        public T PeekTail()
+        {
+            return list.Last.Value;
+        }
     }
 
 }
