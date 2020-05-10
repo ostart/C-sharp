@@ -22,35 +22,56 @@ namespace Tests
         [Test]
         public static void TestCalculateEntropy()
         {
-            var decisionTree = new DecisionTree(table);
-            double actualResult = decisionTree.CalculateEntropy("Play Tennis");
+            var decisionTree = new DecisionTree();
+            double actualResult = decisionTree.CalculateEntropy(table, "Play Tennis");
             Assert.AreEqual(0.94, actualResult, 0.001);
         }
 
         [Test]
         public static void TestCalculateCriterionEntropy()
         {
-            var decisionTree = new DecisionTree(table);
-            double actualResult = decisionTree.CalculateEntropy("Play Tennis", "Outlook", "Sunny");
+            var decisionTree = new DecisionTree();
+            double actualResult = decisionTree.CalculateEntropy(table, "Play Tennis", "Outlook", "Sunny");
             Assert.AreEqual(0.97, actualResult, 0.001);
         }
 
         [Test]
         public static void TestCalculateGain()
         {
-            var decisionTree = new DecisionTree(table);
+            var decisionTree = new DecisionTree();
 
-            double actualResult = decisionTree.CalculateGain("Play Tennis", "Outlook");
+            double actualResult = decisionTree.CalculateGain(table, "Play Tennis", "Outlook");
             Assert.AreEqual(0.246, actualResult, 0.001);
 
-            actualResult = decisionTree.CalculateGain("Play Tennis", "Humidity");
+            actualResult = decisionTree.CalculateGain(table, "Play Tennis", "Humidity");
             Assert.AreEqual(0.151, actualResult, 0.001);
 
-            actualResult = decisionTree.CalculateGain("Play Tennis", "Wind");
+            actualResult = decisionTree.CalculateGain(table, "Play Tennis", "Wind");
             Assert.AreEqual(0.048, actualResult, 0.001);
 
-            actualResult = decisionTree.CalculateGain("Play Tennis", "Temperature");
+            actualResult = decisionTree.CalculateGain(table, "Play Tennis", "Temperature");
             Assert.AreEqual(0.029, actualResult, 0.001);
+        }
+
+        [Test]
+        public static void TestMakeDecisionTree()
+        {
+            var decisionTree = new DecisionTree(table, "Play Tennis");
+
+            var actual = decisionTree.GetResultForCriterion("Play Tennis", new Dictionary<string, string> {{ "Outlook", "Overcast"}});
+            Assert.AreEqual("Yes", actual);
+
+            actual = decisionTree.GetResultForCriterion("Play Tennis", new Dictionary<string, string> {{ "Outlook", "Sunny"}, {"Humidity", "High"}});
+            Assert.AreEqual("No", actual);
+
+            actual = decisionTree.GetResultForCriterion("Play Tennis", new Dictionary<string, string> {{ "Outlook", "Sunny"}, {"Humidity", "Normal"}});
+            Assert.AreEqual("Yes", actual);
+
+            actual = decisionTree.GetResultForCriterion("Play Tennis", new Dictionary<string, string> {{ "Outlook", "Rain"}, {"Wind", "Strong"}});
+            Assert.AreEqual("No", actual);
+
+            actual = decisionTree.GetResultForCriterion("Play Tennis", new Dictionary<string, string> {{ "Outlook", "Rain"}, {"Wind", "Weak"}});
+            Assert.AreEqual("Yes", actual);
         }
     }
 }
