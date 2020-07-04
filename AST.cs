@@ -3,12 +3,44 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures6
 {
-    public class ASTParser
+    public class AST
     {
         public static List<ANode> Parse(string input)
         {
             var preparedInput = AddBrackets(input);
             return GenerateTokens(preparedInput);
+        }
+
+        public static SimpleTree<ANode> Build(List<ANode> nodes)
+        {
+            var currentNode = new SimpleTreeNode<ANode>(null, null);
+            var result = new SimpleTree<ANode>(currentNode);
+            foreach (var node in nodes)
+            {
+                if (node.token_type == TokenType.Bracket && node.token_value == "(")
+                {
+                    var leftEmpty = new SimpleTreeNode<ANode>(null, currentNode);
+                    result.AddChild(currentNode, leftEmpty);
+                    currentNode = leftEmpty;
+                }
+                if (node.token_type == TokenType.Bracket && node.token_value == ")")
+                {
+                    currentNode = currentNode.Parent;
+                }
+                if (node.token_type == TokenType.Integer)
+                {
+                    currentNode.NodeValue = node;
+                    currentNode = currentNode.Parent;
+                }
+                if (node.token_type == TokenType.Operation)
+                {
+                    currentNode.NodeValue = node;
+                    var rightEmpty = new SimpleTreeNode<ANode>(null, currentNode);
+                    result.AddChild(currentNode, rightEmpty);
+                    currentNode = rightEmpty;
+                }
+            }
+            return result;
         }
 
         private static List<ANode> GenerateTokens(string preparedInput)
@@ -161,5 +193,56 @@ namespace AlgorithmsDataStructures6
         Bracket,
         Operation,
         Integer
+    }
+
+    public class SimpleTreeNode<T>
+    {
+        public T NodeValue; // значение в узле
+        public SimpleTreeNode<T> Parent; // родитель или null для корня
+        public List<SimpleTreeNode<T>> Children; // список дочерних узлов или null
+
+        public SimpleTreeNode(T val, SimpleTreeNode<T> parent)
+        {
+            NodeValue = val;
+            Parent = parent;
+            Children = null;
+        }
+    }
+
+    public class SimpleTree<T>
+    {
+        public SimpleTreeNode<T> Root; // корень, может быть null
+
+        public SimpleTree(SimpleTreeNode<T> root)
+        {
+            Root = root;
+        }
+
+        public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
+        {
+            // ваш код добавления нового дочернего узла существующему ParentNode
+            NewChild.Parent = ParentNode;
+            if (ParentNode.Children == null)
+                ParentNode.Children = new List<SimpleTreeNode<T>>();
+            ParentNode.Children.Add(NewChild);
+        }
+
+        public List<SimpleTreeNode<T>> GetAllNodes()
+        {
+            // ваш код выдачи всех узлов дерева в определённом порядке
+            var result = new List<SimpleTreeNode<T>>();
+            FillResult(Root, result);
+            return result;
+        }
+
+        private static void FillResult(SimpleTreeNode<T> node, List<SimpleTreeNode<T>> result)
+        {
+            result.Add(node);
+            if (node.Children == null) return;
+            foreach (var nodeChild in node.Children)
+            {
+                FillResult(nodeChild, result);
+            }
+        }
     }
 }
