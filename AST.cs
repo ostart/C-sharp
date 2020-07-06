@@ -43,6 +43,60 @@ namespace AlgorithmsDataStructures6
             return result;
         }
 
+        public static ANode InterpretAndTranslate(SimpleTree<ANode> ast)
+        {
+            if (ast.Root.NodeValue.token_type == TokenType.Integer) return ast.Root.NodeValue;
+
+            var currentNode = GetCurrentNodeForInterpretAndTranslate(ast.Root);
+            string newValue = CalculateValueForInterpretAndTranslate(currentNode);
+            string newTranslatedResult = TranslateResult(currentNode);
+            currentNode.NodeValue.token_type = TokenType.Integer;
+            currentNode.NodeValue.token_value = newValue;
+            currentNode.NodeValue.translated_result = newTranslatedResult;
+
+            return InterpretAndTranslate(ast);
+        }
+
+        private static SimpleTreeNode<ANode> GetCurrentNodeForInterpretAndTranslate(SimpleTreeNode<ANode> node)
+        {
+            if (node.Children[0].NodeValue.token_type == TokenType.Integer && node.Children[1].NodeValue.token_type == TokenType.Integer) return node;
+            if (node.Children[0].NodeValue.token_type == TokenType.Operation) return GetCurrentNodeForInterpretAndTranslate(node.Children[0]);
+            if (node.Children[1].NodeValue.token_type == TokenType.Operation) return GetCurrentNodeForInterpretAndTranslate(node.Children[1]);
+            return null;
+        }
+
+        private static string CalculateValueForInterpretAndTranslate(SimpleTreeNode<ANode> currentNode)
+        {
+            var arg1 = int.Parse(currentNode.Children[0].NodeValue.token_value);
+            var arg2 = int.Parse(currentNode.Children[1].NodeValue.token_value);
+            var result = 0;
+            switch (currentNode.NodeValue.token_value)
+            {
+                case "/":
+                    result = arg1 / arg2;
+                    break;
+                case "*":
+                    result = arg1 * arg2;
+                    break;
+                case "-":
+                    result = arg1 - arg2;
+                    break;
+                case "+":
+                    result = arg1 + arg2;
+                    break;
+                default:
+                    throw new Exception();
+            }
+            return result.ToString();
+        }
+
+        private static string TranslateResult(SimpleTreeNode<ANode> currentNode)
+        {
+            var arg1 = string.IsNullOrEmpty(currentNode.Children[0].NodeValue.translated_result) ? currentNode.Children[0].NodeValue.token_value : currentNode.Children[0].NodeValue.translated_result;
+            var arg2 = string.IsNullOrEmpty(currentNode.Children[1].NodeValue.translated_result) ? currentNode.Children[1].NodeValue.token_value : currentNode.Children[1].NodeValue.translated_result;
+            return $"({arg1}{currentNode.NodeValue.token_value}{arg2})";
+        }
+
         private static List<ANode> GenerateTokens(string preparedInput)
         {
             var result = new List<ANode>();
@@ -186,6 +240,7 @@ namespace AlgorithmsDataStructures6
     {
         public TokenType token_type {get;set;}
         public string token_value {get;set;}
+        public string translated_result {get;set;}
     }
 
     public enum TokenType
