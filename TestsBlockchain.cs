@@ -90,5 +90,22 @@ namespace Tests
             Assert.AreEqual(6, blockchain.Blocks.Count);
             Assert.IsTrue(blockchain.IsCorrectChain());
         }
+
+        [Test]
+        public void Test6Zero()
+        {
+            var watch = Stopwatch.StartNew();
+            var blockchain = new Blockchain(6);
+            blockchain.AddBlock("One");
+            blockchain.AddBlock("Two");
+            blockchain.AddBlock("Three");
+            blockchain.AddBlock("Four");
+            blockchain.AddBlock("Five");
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Debug.WriteLine("6 zero: " + elapsedMs);
+            Assert.AreEqual(6, blockchain.Blocks.Count);
+            Assert.IsTrue(blockchain.IsCorrectChain());
+        }
     }
 }
