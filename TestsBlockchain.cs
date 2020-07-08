@@ -6,11 +6,17 @@ namespace Tests
 {
     public class TestsBlockchain
     {
-        [Test]
-        public void Test1Zero()
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        public void TestZeros(int zeros)
         {
             var watch = Stopwatch.StartNew();
-            var blockchain = new Blockchain(1);
+            var blockchain = new Blockchain(zeros);
             blockchain.AddBlock("One");
             blockchain.AddBlock("Two");
             blockchain.AddBlock("Three");
@@ -18,109 +24,7 @@ namespace Tests
             blockchain.AddBlock("Five");
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
-            Debug.WriteLine("1 zero: " + elapsedMs);
-            Assert.AreEqual(6, blockchain.Blocks.Count);
-            Assert.IsTrue(blockchain.IsCorrectChain());
-        }
-
-        [Test]
-        public void Test2Zero()
-        {
-            var watch = Stopwatch.StartNew();
-            var blockchain = new Blockchain(2);
-            blockchain.AddBlock("One");
-            blockchain.AddBlock("Two");
-            blockchain.AddBlock("Three");
-            blockchain.AddBlock("Four");
-            blockchain.AddBlock("Five");
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Debug.WriteLine("2 zero: " + elapsedMs);
-            Assert.AreEqual(6, blockchain.Blocks.Count);
-            Assert.IsTrue(blockchain.IsCorrectChain());
-        }
-
-        [Test]
-        public void Test3Zero()
-        {
-            var watch = Stopwatch.StartNew();
-            var blockchain = new Blockchain(3);
-            blockchain.AddBlock("One");
-            blockchain.AddBlock("Two");
-            blockchain.AddBlock("Three");
-            blockchain.AddBlock("Four");
-            blockchain.AddBlock("Five");
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Debug.WriteLine("3 zero: " + elapsedMs);
-            Assert.AreEqual(6, blockchain.Blocks.Count);
-            Assert.IsTrue(blockchain.IsCorrectChain());
-        }
-
-        [Test]
-        public void Test4Zero()
-        {
-            var watch = Stopwatch.StartNew();
-            var blockchain = new Blockchain(4);
-            blockchain.AddBlock("One");
-            blockchain.AddBlock("Two");
-            blockchain.AddBlock("Three");
-            blockchain.AddBlock("Four");
-            blockchain.AddBlock("Five");
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Debug.WriteLine("4 zero: " + elapsedMs);
-            Assert.AreEqual(6, blockchain.Blocks.Count);
-            Assert.IsTrue(blockchain.IsCorrectChain());
-        }
-
-        [Test]
-        public void Test5Zero()
-        {
-            var watch = Stopwatch.StartNew();
-            var blockchain = new Blockchain(5);
-            blockchain.AddBlock("One");
-            blockchain.AddBlock("Two");
-            blockchain.AddBlock("Three");
-            blockchain.AddBlock("Four");
-            blockchain.AddBlock("Five");
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Debug.WriteLine("5 zero: " + elapsedMs);
-            Assert.AreEqual(6, blockchain.Blocks.Count);
-            Assert.IsTrue(blockchain.IsCorrectChain());
-        }
-
-        [Test]
-        public void Test6Zero()
-        {
-            var watch = Stopwatch.StartNew();
-            var blockchain = new Blockchain(6);
-            blockchain.AddBlock("One");
-            blockchain.AddBlock("Two");
-            blockchain.AddBlock("Three");
-            blockchain.AddBlock("Four");
-            blockchain.AddBlock("Five");
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Debug.WriteLine("6 zero: " + elapsedMs);
-            Assert.AreEqual(6, blockchain.Blocks.Count);
-            Assert.IsTrue(blockchain.IsCorrectChain());
-        }
-
-        [Test]
-        public void Test7Zero()
-        {
-            var watch = Stopwatch.StartNew();
-            var blockchain = new Blockchain(7);
-            blockchain.AddBlock("One");
-            blockchain.AddBlock("Two");
-            blockchain.AddBlock("Three");
-            blockchain.AddBlock("Four");
-            blockchain.AddBlock("Five");
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Debug.WriteLine("7 zero: " + elapsedMs);
+            Debug.WriteLine($"{zeros} zeros: " + elapsedMs);
             Assert.AreEqual(6, blockchain.Blocks.Count);
             Assert.IsTrue(blockchain.IsCorrectChain());
         }
