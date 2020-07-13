@@ -16,6 +16,48 @@ namespace AlgorithmsDataStructures6
             this.threshold = threshold;
         }
 
+        public Perceptron(int rows, int columns, decimal threshold)
+        {
+            this.weigths = new decimal[rows, columns];
+            this.threshold = threshold;
+        }
+
+        public decimal[,] Educate(string folderPath, int cycleLimit, out int iterationCounter)
+        {
+            var filePaths = Directory.GetFiles(folderPath, "*.txt", SearchOption.TopDirectoryOnly);
+            var restart = false;
+            iterationCounter = 0;
+            do
+            {
+                iterationCounter += 1;
+                restart = false;
+                foreach (var filePath in filePaths)
+                {
+                    var output = CalculateOutput(filePath);
+                    if (Path.GetFileName(filePath).StartsWith("positive"))
+                    {
+                        if (output != 1) 
+                        {
+                            IncreaseWeights(filePath);
+                            restart = true;
+                        }
+                    }
+                    else
+                    {
+                        if (output != 0) 
+                        {
+                            DecreaseWeights(filePath);
+                            restart = true;
+                        }
+                    }
+                }
+                if (iterationCounter > cycleLimit) throw new Exception("Limit of cycles exceeded");
+            }
+            while(restart);
+
+            return weigths;
+        }
+
         public int CalculateOutput(string filePath)
         {
             var input = GetInput(filePath);
@@ -28,6 +70,22 @@ namespace AlgorithmsDataStructures6
                     sum += weigths[i,j] * input[i,j];
 
             return sum < threshold ? 0 : 1;
+        }
+
+        private void DecreaseWeights(string filePath)
+        {
+            var input = GetInput(filePath);
+            for (int i = 0; i < weigths.GetLength(0); i++)
+                for (int j = 0; j < weigths.GetLength(1); j++)
+                    weigths[i,j] -= input[i,j];
+        }
+
+        private void IncreaseWeights(string filePath)
+        {
+            var input = GetInput(filePath);
+            for (int i = 0; i < weigths.GetLength(0); i++)
+                for (int j = 0; j < weigths.GetLength(1); j++)
+                    weigths[i,j] += input[i,j];
         }
 
         private int[,] GetInput(string filePath)

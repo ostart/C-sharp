@@ -51,5 +51,36 @@ namespace Tests
         {
             Assert.AreEqual(0, _neuron.CalculateOutput(filePath));
         }
+
+        [TestCase("../../../PerceptronInput/")]
+        public void TestPerceptronEducation_DiversInputs_WeightsResult(string folderPath)
+        {
+            var neuron = new Perceptron(10, 10, 35);
+            var resultWeight = neuron.Educate(folderPath, 100, out var counter);
+            var ethalonWeigths = new decimal[10,10]
+            {
+                {-1,0,0,0,2,2,0,0,0,0},
+                {-1,0,0,0,2,2,0,0,1,4},
+                {-1,0,0,2,0,0,2,1,0,4},
+                {-1,0,0,2,0,0,3,0,0,4},
+                {-1,0,2,0,0,1,0,2,0,4},
+                {-1,-1,1,1,2,2,2,2,0,0},
+                {-1,2,0,1,0,0,0,0,2,2},
+                {-1,2,1,0,0,0,0,0,2,2},
+                {1,1,0,0,0,0,0,0,0,4},
+                {2,-2,-2,-2,-2,-2,-2,-2,-2,4}
+            };
+
+            Assert.AreEqual(7, counter);
+            Assert.AreEqual(ethalonWeigths.GetLength(0), resultWeight.GetLength(0));
+            Assert.AreEqual(ethalonWeigths.GetLength(1), resultWeight.GetLength(1));
+                        
+            var flag = true;
+            for (int i = 0; i < resultWeight.GetLength(0); i++)
+                for (int j = 0; j < resultWeight.GetLength(1); j++)
+                    if (resultWeight[i,j] != ethalonWeigths[i,j]) flag = false;
+            
+            Assert.IsTrue(flag);
+        }
     }
 }
