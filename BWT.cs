@@ -35,13 +35,62 @@ namespace AlgorithmsDataStructures6
             if (isSymmetric) Colorize(DescendingTree, AscendingTree);
             else Colorize(RootOfAscendingTree);
 
-            _LeafBindingStructure = new Dictionary<BWTNode, List<BWTNode>>();
             var leafsNumber = (int)Math.Pow(2, levels);
             var descLeafs = DescendingTree.GetRange(DescendingTree.Count - leafsNumber, leafsNumber);
             var ascLeafs = AscendingTree.GetRange(DescendingTree.Count - leafsNumber, leafsNumber);
+            _LeafBindingStructure = new Dictionary<BWTNode, List<BWTNode>>();
+            for (int i = 0; i < descLeafs.Count; i++)
+            {
+                _LeafBindingStructure.Add(descLeafs[i], new List<BWTNode>());
+                _LeafBindingStructure.Add(ascLeafs[i], new List<BWTNode>());
+            }
             BindLeafs(descLeafs,ascLeafs);
-            //разукрасить ее
-            //метод вывода на экран с цветом
+            ColorizeLeafs(descLeafs, ascLeafs);
+        }
+
+        public void ConsoleWriteLines()
+        {
+            var shift = 0;
+            for (int i = 0; i <= _level; i++)
+            {
+                var nodesNumber = (int)Math.Pow(2, i);
+                var nodesInLine = DescendingTree.GetRange(shift, nodesNumber);
+                shift += nodesNumber;
+                WriteParentColors(nodesInLine);
+                WriteIndexes(nodesInLine);
+                if (i == _level) WriteChildColors(nodesInLine);
+            }
+
+            for (int i = _level; i >= 0; i--)
+            {
+                var nodesNumber = (int)Math.Pow(2, i);
+                shift -= nodesNumber;
+                var nodesInLine = AscendingTree.GetRange(shift, nodesNumber);
+                WriteParentColors(nodesInLine);
+                WriteIndexes(nodesInLine);
+            }
+            //Console.ForegroundColor = (ConsoleColor)Enum.Parse(type, name);
+            //Console.WriteLine(name);
+        }
+
+        private void ColorizeLeafs(List<BWTNode> descLeafs, List<BWTNode> ascLeafs)
+        {
+            foreach (var descLeaf in descLeafs)
+            {
+                var relatedNodes = _LeafBindingStructure[descLeaf];
+                descLeaf.LeftChild = relatedNodes[0];
+                descLeaf.LeftChildColor = relatedNodes[0].ParetColor;
+                descLeaf.RightChild = relatedNodes[1];
+                descLeaf.RightChildColor = relatedNodes[1].ParetColor;
+            }
+            foreach (var ascLeaf in ascLeafs)
+            {
+                var relatedNodes = _LeafBindingStructure[ascLeaf];
+                ascLeaf.LeftChild = relatedNodes[0];
+                ascLeaf.LeftChildColor = relatedNodes[0].ParetColor;
+                ascLeaf.RightChild = relatedNodes[1];
+                ascLeaf.RightChildColor = relatedNodes[1].ParetColor;
+            }
         }
 
         private void BindLeafs(List<BWTNode> descLeafs, List<BWTNode> ascLeafs)
@@ -49,18 +98,30 @@ namespace AlgorithmsDataStructures6
             var sortedByPossibility = SortAscendingByPossibilityOfBind(descLeafs, ascLeafs);
             foreach (var node in sortedByPossibility)
             {
-                if (_LeafBindingStructure.ContainsKey(node) && _LeafBindingStructure[node].Count == 2) continue;
+                if (_LeafBindingStructure[node].Count == 2) continue;
                 if (descLeafs.Contains(node, new BWTNodeComparer()))
                 {
-                    var counter = 0;
                     foreach (var possibleLinkedNode in ascLeafs)
                     {
-                        
+                        if (_LeafBindingStructure[possibleLinkedNode].Count == 2) continue;
+                        if (node.ParentColor != possibleLinkedNode.ParentColor)
+                        {
+                            _LeafBindingStructure[node].Add(possibleLinkedNode);
+                            _LeafBindingStructure[possibleLinkedNode].Add(node);
+                        }
                     }
                 }
-                else
+                else // ascLeafs
                 {
-
+                    foreach (var possibleLinkedNode in descLeafs)
+                    {
+                        if (_LeafBindingStructure[possibleLinkedNode].Count == 2) continue;
+                        if (node.ParentColor != possibleLinkedNode.ParentColor)
+                        {
+                            _LeafBindingStructure[node].Add(possibleLinkedNode);
+                            _LeafBindingStructure[possibleLinkedNode].Add(node);
+                        }
+                    }
                 }
             }
         }
