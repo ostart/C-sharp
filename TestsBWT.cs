@@ -10,7 +10,7 @@ namespace Tests
         [Test]
         public void TestBWT_PositiveInput_TrueResult()
         {
-            var bwt = new BWT(2, 3, false);
+            var bwt = new BWT(3, 4, true);
         }
     }
 }
