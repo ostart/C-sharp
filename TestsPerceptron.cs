@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using AlgorithmsDataStructures6;
-using System.Diagnostics;
 
 namespace Tests
 {
