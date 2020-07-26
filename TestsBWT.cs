@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using AlgorithmsDataStructures6;
 using System;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -52,6 +53,32 @@ namespace Tests
             Assert.IsTrue(rootDesc.LeftChild.RightChild.ParentColor == rootAsc.RightChild.LeftChild.ParentColor);
             Assert.IsTrue(rootDesc.LeftChild.RightChild.LeftChildColor == rootAsc.RightChild.LeftChild.RightChildColor);
             Assert.IsTrue(rootDesc.LeftChild.RightChild.RightChildColor == rootAsc.RightChild.LeftChild.LeftChildColor);
+        }
+
+        [Test]
+        public void TestBWT_PositiveCase_FindMinColor1()
+        {
+            var bwt = new BWT(3, 4, true);
+            var path = bwt.FindPath(color: 1, FindCriterion.MinBranchesOfColor);
+            var expected = new List<int> {1,2,4,9,24,8,23,19,17,16};
+            Assert.AreEqual(expected.Count, path.Count);
+            for (int i = 0; i < path.Count; i++)
+            {
+                Assert.AreEqual(expected[i], path[i].Index);
+            }
+        }
+
+        [Test]
+        public void TestBWT_PositiveCase_FindMaxColor4()
+        {
+            var bwt = new BWT(3, 4, true);
+            var path = bwt.FindPath(color: 4, FindCriterion.MaxBranchesOfColor);
+            var expected = new List<int> {1,2,4,8,23,9,24,19,17,16};
+            Assert.AreEqual(expected.Count, path.Count);
+            for (int i = 0; i < path.Count; i++)
+            {
+                Assert.AreEqual(expected[i], path[i].Index);
+            }
         }
     }
 }
