@@ -2,6 +2,7 @@ using NUnit.Framework;
 using AlgorithmsDataStructures6;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests
 {
@@ -79,6 +80,43 @@ namespace Tests
             {
                 Assert.AreEqual(expected[i], path[i].Index);
             }
+        }
+
+        [Test]
+        public void TestBWT_PositiveCase_AverageNumberOfStepNormalModeling()
+        {
+            var bwt = new BWT(3, 4, true);
+            var results = new List<int>();
+            for (int i = 0; i < 10000; i++)
+            {
+                var normalNumberOfSteps = bwt.NormalModeling(1,16);
+                results.Add(normalNumberOfSteps);
+            }
+            var avg = results.Average();
+            Assert.AreEqual(avg, 82, 1);
+        }
+
+        [Test]
+        public void TestBWT_PositiveCase_AverageNumberOfStepQuantumModeling()
+        {
+            var bwt = new BWT(3, 4, true);
+            var results = new List<int>();
+            for (int i = 0; i < 10000; i++)
+            {
+                var quantumNumberOfSteps = bwt.QuantumModeling(1,16);
+                results.Add(quantumNumberOfSteps);
+            }
+            var avg = results.Average();
+            Assert.AreEqual(avg, 11, 1);
+        }
+
+        [Test]
+        public void TestBWT_PositiveCase_CompareNormalAndQuantumCalc()
+        {
+            var bwt = new BWT(3, 4, true);
+            var normalNumberOfSteps = bwt.NormalModeling(1,16);
+            var quantumNumberOfSteps = bwt.QuantumModeling(1,16);
+            Assert.IsTrue(normalNumberOfSteps > quantumNumberOfSteps);
         }
     }
 }

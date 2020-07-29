@@ -11,6 +11,8 @@ namespace AlgorithmsDataStructures6
         public BWTNode RootOfAscendingTree {get;set;}
         public List<BWTNode> AscendingTree {get;set;}
         private Dictionary<BWTNode, List<BWTNode>> _LeafBindingStructure {get;set;}
+
+        private Random _rnd = new Random();
         
         private int _levels;
         private List<int> _colors;
@@ -46,6 +48,65 @@ namespace AlgorithmsDataStructures6
             }
             BindLeafs(descLeafs,ascLeafs);
             ColorizeLeafs(descLeafs, ascLeafs);
+        }
+
+        public int QuantumModeling(int startIndex, int stopIndex)
+        {
+            BWTNode currentNode = null;
+            currentNode = DescendingTree.Find(x => x.Index == startIndex);
+            if (currentNode == null) currentNode = AscendingTree.Find(x => x.Index == startIndex);
+            if (currentNode == null) throw new NullReferenceException($"There is no a node with index {startIndex}");
+
+            var currentNodes = new List<BWTNode> { currentNode };
+            var counter = 0;
+            while(true)
+            {
+                counter += 1;
+                var newCurrentNodes = new List<BWTNode>();
+                foreach (var node in currentNodes)
+                {
+                    var nodeDoubling1 = RandomStep(node);
+                    if (nodeDoubling1.Index == stopIndex) return counter;
+                    if (!newCurrentNodes.Contains(nodeDoubling1)) newCurrentNodes.Add(nodeDoubling1);
+                    var nodeDoubling2 = RandomStep(node);
+                    if (nodeDoubling2.Index == stopIndex) return counter;
+                    if (!newCurrentNodes.Contains(nodeDoubling2)) newCurrentNodes.Add(nodeDoubling2);
+                }
+                currentNodes = newCurrentNodes;
+            }
+        }
+
+        public int NormalModeling(int startIndex, int stopIndex)
+        {
+            BWTNode currentNode = null;
+            currentNode = DescendingTree.Find(x => x.Index == startIndex);
+            if (currentNode == null) currentNode = AscendingTree.Find(x => x.Index == startIndex);
+            if (currentNode == null) throw new NullReferenceException($"There is no a node with index {startIndex}");
+
+            var counter = 0;
+            do
+            {
+                currentNode = RandomStep(currentNode);
+                counter += 1;
+            }while(currentNode.Index != stopIndex);
+            return counter;
+        }
+
+        private BWTNode RandomStep(BWTNode currentNode)
+        {
+            var direction = _rnd.Next(3);
+            switch (direction)
+            {
+                case 0:
+                    var parent = currentNode.Parent;
+                    return parent == null ? currentNode : parent;
+                case 1:
+                    return currentNode.LeftChild;
+                case 2:
+                    return currentNode.RightChild;
+                default:
+                    throw new Exception("Incorrect direction");
+            }
         }
 
         public List<BWTNode> FindPath(int color, FindCriterion findCriterion)
