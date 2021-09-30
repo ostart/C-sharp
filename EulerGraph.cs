@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -78,27 +77,27 @@ namespace AlgorithmsDataStructures5
         public static EulerGraph<T> Merge(EulerGraph<T> graph1, EulerGraph<T> graph2)
         {
             var result = Clone(graph1);
-            var v1 = result.Roots[0];
-            var v2 = graph2.Roots[0];
+            var vertex1 = result.Roots[0];
+            var vertex2 = graph2.Roots[0];
             foreach (var vertex in graph2.VertexChildNodes)
             {
                 result.VertexChildNodes[vertex.Key] = vertex.Value;
             }
-            result.VertexChildNodes[v1].Add(v2);
-            result.VertexChildNodes[v2].Add(v1);
+            result.VertexChildNodes[vertex1].Add(vertex2);
+            result.VertexChildNodes[vertex2].Add(vertex1);
             result.Tours[0].AddRange(graph2.Tours[0]);
-            result.Tours[0].Add(v1);
+            result.Tours[0].Add(vertex1);
             return result;
         }
 
-        public bool BothBelong(T v1, T v2)
+        public bool BothBelong(T vertex1, T vertex2)
         {
             var result = false;
             if (Tours.Count > 0)
             {
                 foreach (var tour in Tours)
                 {
-                    if (tour.Contains(v1) && tour.Contains(v2)) result = true;
+                    if (tour.Contains(vertex1) && tour.Contains(vertex2)) result = true;
                 }
             }
             return result;

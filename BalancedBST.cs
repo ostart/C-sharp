@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-      public class BSTNode
+    public class BSTNode
       {
         public int NodeKey; // ключ узла
         public BSTNode Parent; // родитель или null для корня

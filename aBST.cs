@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-  public class aBST
+    public class aBST
   {
     public int? [] Tree; // массив ключей
 	

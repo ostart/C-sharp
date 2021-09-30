@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 namespace GallopingSearchSpace
 {
-  public class GallopingSearch
+    public class GallopingSearch
   {
       private int[] _sortedArray;
       private int _desiredValue;

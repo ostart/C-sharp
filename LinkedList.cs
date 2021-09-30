@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 
 namespace AlgorithmsDataStructuresLinkedList
 {
-   public class Node
+    public class Node
    {
      public int value;
      public Node next;

@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-
 namespace SortSpace
 {
-  public class BinarySearch
+    public class BinarySearch
   {
       public int Left;
       public int Right;

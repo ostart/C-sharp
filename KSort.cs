@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace SortSpace
 {
-  public class KSort
+    public class KSort
   {
       public string[] items;
 
@@ -36,10 +35,10 @@ namespace SortSpace
 
       public bool add(string s)
       {
-          var i = index(s);
-          if(i == -1) 
+          var indexInItems = index(s);
+          if(indexInItems == -1) 
             return false;
-          items[i] = s;
+          items[indexInItems] = s;
           return true;
       }
 

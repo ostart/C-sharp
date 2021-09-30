@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-	public class Heap
+    public class Heap
 	{
 		public int [] HeapArray; // хранит неотрицательные числа-ключи
         private int last = -1;
@@ -38,13 +37,13 @@ namespace AlgorithmsDataStructures2
             {
                 HeapArray[0] = HeapArray[last];
                 HeapArray[last] = -1;
-                SiftDown(0);
+                ShiftDown(0);
             }
             last -= 1;
             return top;
 		}
 
-        private void SiftDown(int index)
+        private void ShiftDown(int index)
         {
             var left = 2*index+1;
             var right = 2*index+2;
@@ -52,7 +51,7 @@ namespace AlgorithmsDataStructures2
             int current = HeapArray[left] >= HeapArray[right] ? left : right;
             if(HeapArray[index] >= HeapArray[current]) return;
             Swap(index, current);
-            SiftDown(current);
+            ShiftDown(current);
         }
 
         private void Swap(int index, int current)
@@ -68,17 +67,17 @@ namespace AlgorithmsDataStructures2
             last += 1;
             if(last >= HeapArray.Length) return false;// если куча вся заполнена
             HeapArray[last] = key;
-            SiftUp(last);
+            ShiftUp(last);
 			return true; 
 		}
 
-        private void SiftUp(int index)
+        private void ShiftUp(int index)
         {
             var parent = (index - 1) / 2;
             if(parent < 0) return;
             if(HeapArray[parent] >= HeapArray[index]) return;
             Swap(index, parent);
-            SiftUp(parent);
+            ShiftUp(parent);
         }
     }
 }

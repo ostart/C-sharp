@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace AlgorithmsDataStructuresHashTable
 {
 
@@ -22,9 +19,9 @@ namespace AlgorithmsDataStructuresHashTable
         {
             // всегда возвращает корректный индекс слота
             var total = 0;
-            var c = value.ToCharArray();
-            for (var i = 0; i <= c.GetUpperBound(0); i++)
-                total += (int)c[i];
+            var charArray = value.ToCharArray();
+            for (var i = 0; i <= charArray.GetUpperBound(0); i++)
+                total += (int)charArray[i];
 
             return total % size;
         }

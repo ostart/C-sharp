@@ -37,21 +37,21 @@ namespace AlgorithmsDataStructures5
         {
             _ajacencyList[vertex1].Add(vertex2);
             _ajacencyList[vertex2].Add(vertex1);
-            var con1 = new Edge<T>(vertex1, vertex2);
-            var con2 = new Edge<T>(vertex2, vertex1);
+            var connectionNode1ToNode2 = new Edge<T>(vertex1, vertex2);
+            var connectionNode2ToNode1 = new Edge<T>(vertex2, vertex1);
 
             if (!IsConnected(vertex1,vertex2))
             {
-                _bridges.Add(con1);
+                _bridges.Add(connectionNode1ToNode2);
             }
             else
             {
                 if (!IsSame2EdgeConnectivity(vertex1, vertex2))
                 {
-                    if (_bridges.Contains(con1))
-                        _bridges.Remove(con1);
-                    else if (_bridges.Contains(con2))
-                        _bridges.Remove(con2);
+                    if (_bridges.Contains(connectionNode1ToNode2))
+                        _bridges.Remove(connectionNode1ToNode2);
+                    else if (_bridges.Contains(connectionNode2ToNode1))
+                        _bridges.Remove(connectionNode2ToNode1);
                     _dsu2EdgeConnectivity.Unite(vertex1, vertex2);
                     var bridges = _bridges.ConvertAll(x => new Edge<T>(x.Vertex1, x.Vertex2));
                     foreach (var bridge in bridges)
@@ -64,9 +64,9 @@ namespace AlgorithmsDataStructures5
                     }
                 }
             }
-            if (!_edges.Contains(con1) || !_edges.Contains(con2))
+            if (!_edges.Contains(connectionNode1ToNode2) || !_edges.Contains(connectionNode2ToNode1))
             {
-                _edges.Add(con1);
+                _edges.Add(connectionNode1ToNode2);
                 _dsuConnectivity.Unite(vertex1, vertex2);
             }
         }
@@ -75,12 +75,12 @@ namespace AlgorithmsDataStructures5
         {
             _ajacencyList[vertex1].Remove(vertex2);
             _ajacencyList[vertex2].Remove(vertex1);
-            var con1 = new Edge<T>(vertex1, vertex2);
-            var con2 = new Edge<T>(vertex2, vertex1);
-            if (_edges.Contains(con1))
-                _edges.Remove(con1);
-            else if (_edges.Contains(con2))
-                _edges.Remove(con2);
+            var connectionNode1ToNode2 = new Edge<T>(vertex1, vertex2);
+            var connectionNode2ToNode1 = new Edge<T>(vertex2, vertex1);
+            if (_edges.Contains(connectionNode1ToNode2))
+                _edges.Remove(connectionNode1ToNode2);
+            else if (_edges.Contains(connectionNode2ToNode1))
+                _edges.Remove(connectionNode2ToNode1);
             var edges = _edges.ConvertAll(x => new Edge<T>(x.Vertex1, x.Vertex2));
             _ajacencyList = new Dictionary<T, List<T>>();
             _edges = new List<Edge<T>>();

@@ -21,7 +21,7 @@ namespace Tests
         {
             var testFilter = new BloomFilter(32);
             Assert.AreEqual(32, testFilter.bitArray.Length);       
-            Assert.AreEqual(32, testFilter.filter_len);       
+            Assert.AreEqual(32, testFilter.filter_length);       
             Assert.AreEqual(13, testFilter.Hash1(zero));
             foreach(bool item in testFilter.bitArray)
                 Assert.IsTrue(item == false);
@@ -32,7 +32,7 @@ namespace Tests
         {
             var testFilter = new BloomFilter(32);
             Assert.AreEqual(32, testFilter.bitArray.Length);       
-            Assert.AreEqual(32, testFilter.filter_len);   
+            Assert.AreEqual(32, testFilter.filter_length);   
             Assert.AreEqual(5, testFilter.Hash2(zero));
             foreach(bool item in testFilter.bitArray)
                 Assert.IsTrue(item == false);
@@ -43,13 +43,13 @@ namespace Tests
         {
             var testFilter = new BloomFilter(32);
             Assert.AreEqual(32, testFilter.bitArray.Length);       
-            Assert.AreEqual(32, testFilter.filter_len);   
+            Assert.AreEqual(32, testFilter.filter_length);   
             testFilter.Add(zero);
             testFilter.Add(two);
             testFilter.Add(four);
             testFilter.Add(six);
             testFilter.Add(eigth);
-            for(int i = 0; i<testFilter.filter_len; i++)
+            for(int i = 0; i<testFilter.filter_length; i++)
             {
                 if (i == 5 || i == 13) Assert.IsTrue(testFilter.bitArray[i] == true);
                 else Assert.IsTrue(testFilter.bitArray[i] == false);
@@ -61,13 +61,13 @@ namespace Tests
         {
             var testFilter = new BloomFilter(32);
             Assert.AreEqual(32, testFilter.bitArray.Length);       
-            Assert.AreEqual(32, testFilter.filter_len);   
+            Assert.AreEqual(32, testFilter.filter_length);   
             testFilter.Add(one);
             testFilter.Add(three);
             testFilter.Add(five);
             testFilter.Add(seven);
             testFilter.Add(nine);
-            for(int i = 0; i<testFilter.filter_len; i++)
+            for(int i = 0; i<testFilter.filter_length; i++)
             {
                 if (i == 27 || i == 29) Assert.IsTrue(testFilter.bitArray[i] == true);
                 else Assert.IsTrue(testFilter.bitArray[i] == false);
@@ -80,10 +80,10 @@ namespace Tests
         {
             var testFilter = new BloomFilter(32);
             Assert.AreEqual(32, testFilter.bitArray.Length);       
-            Assert.AreEqual(32, testFilter.filter_len);   
+            Assert.AreEqual(32, testFilter.filter_length);   
             testFilter.Add(zero);
             testFilter.Add(one);
-            for(int i = 0; i<testFilter.filter_len; i++)
+            for(int i = 0; i<testFilter.filter_length; i++)
             {
                 if (i == 5 || i == 13 || i == 27 || i == 29) Assert.IsTrue(testFilter.bitArray[i] == true);
                 else Assert.IsTrue(testFilter.bitArray[i] == false);

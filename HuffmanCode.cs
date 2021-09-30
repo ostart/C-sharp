@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -8,14 +7,14 @@ namespace AlgorithmsDataStructures5
     {
         public static Dictionary<char, string> Make(string input)
         {
-            var dico = new Dictionary<char, int>();
+            var dictionaryCharacterCount = new Dictionary<char, int>();
             foreach(var letter in input)
             {
-                if (dico.ContainsKey(letter)) dico[letter] += 1;
-                else dico[letter] = 1;
+                if (dictionaryCharacterCount.ContainsKey(letter)) dictionaryCharacterCount[letter] += 1;
+                else dictionaryCharacterCount[letter] = 1;
             }
 
-            var initials = CreateInitials(dico.ToList());
+            var initials = CreateInitials(dictionaryCharacterCount.ToList());
 
             var root = CreateTree(initials);
 

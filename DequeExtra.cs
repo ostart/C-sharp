@@ -2,10 +2,10 @@ namespace AlgorithmsDataStructures
 {
     public class DequeExtra
     {
-        public static bool IsPalindrome(string str)
+        public static bool IsPalindrome(string inputString)
         {
             var deque = new Deque<char>();
-            foreach (var character in str.ToCharArray())
+            foreach (var character in inputString.ToCharArray())
             {
                 deque.AddTail(character);
             }

@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 namespace SortSpace
 {
-  public class HeapSort
+    public class HeapSort
   {
       public Heap HeapObject = new Heap();
 
@@ -93,17 +92,17 @@ namespace SortSpace
         last += 1;
         if(last >= HeapArray.Length) return false;// если куча вся заполнена
         HeapArray[last] = key;
-        SiftUp(last);
+        ShiftUp(last);
 		return true; 
 	}
 
-    private void SiftUp(int index)
+    private void ShiftUp(int index)
     {
         var parent = (index - 1) / 2;
         if(parent < 0) return;
         if(HeapArray[parent] >= HeapArray[index]) return;
         Swap(index, parent);
-        SiftUp(parent);
+        ShiftUp(parent);
     }
   }
 }
