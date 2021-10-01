@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace AlgorithmsDataStructures
 {
     class NativeCache<T>
@@ -10,9 +7,9 @@ namespace AlgorithmsDataStructures
         public T[] values;
         public int[] hits;
 
-        public NativeCache(int sz)
+        public NativeCache(int cacheSize)
         {
-            size = sz;
+            size = cacheSize;
             slots = new string[size];
             values = new T[size];
             hits = new int[size];

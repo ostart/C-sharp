@@ -33,10 +33,10 @@ namespace AlgorithmsDataStructures6
                 restart = false;
                 foreach (var filePath in filePaths)
                 {
-                    var output = CalculateOutput(filePath);
+                    var recognitionResult = CalculateOutput(filePath);
                     if (Path.GetFileName(filePath).StartsWith("positive"))
                     {
-                        if (output != 1) 
+                        if (recognitionResult != 1) 
                         {
                             IncreaseWeights(filePath);
                             restart = true;
@@ -44,7 +44,7 @@ namespace AlgorithmsDataStructures6
                     }
                     else
                     {
-                        if (output != 0) 
+                        if (recognitionResult != 0) 
                         {
                             DecreaseWeights(filePath);
                             restart = true;
@@ -64,12 +64,12 @@ namespace AlgorithmsDataStructures6
             if (weigths.GetLength(0) != input.GetLength(0) || weigths.GetLength(1) != input.GetLength(1))
                 throw new Exception("Inappropriate size of input and weigths arrays");
             
-            var sum = 0m;
+            var sumOfWeights = 0m;
             for (int i = 0; i < weigths.GetLength(0); i++)
                 for (int j = 0; j < weigths.GetLength(1); j++)
-                    sum += weigths[i,j] * input[i,j];
+                    sumOfWeights += weigths[i,j] * input[i,j];
 
-            return sum < threshold ? 0 : 1;
+            return sumOfWeights < threshold ? 0 : 1;
         }
 
         private void DecreaseWeights(string filePath)

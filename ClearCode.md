@@ -16,3 +16,28 @@ v2 - vertex2 // узел номер 2
 c - charArray // массив символов
 dico - dictionaryCharacterCount // словарь количества повторений символов
 i - indexInItems // индекс строки s в массиве items
+
+6.1
+r - resultListOfNodes
+found - nodeToDelete
+sum - sumOfWeights
+output - recognitionResult
+array - stackValuesAsArray
+
+6.2
+AST - Abstract Syntacs Tree
+BST - Binary Search Tree
+RMQ - Range Minimum Query
+LCA - Least Common Ancestor
+
+6.3
+var temp в функции Swap
+var node в функции Add
+var currentNode в функции Merge
+
+6.4
+sz - cacheSize
+data - choiceTableValue
+table - choiceTable
+cur - currentValueOfGain
+max - maxGainCriterion

@@ -6,7 +6,7 @@ namespace AlgorithmsDataStructures5
 {
     public class DecisionTree
     {
-        private Dictionary<string, List<string>> _table;
+        private Dictionary<string, List<string>> _choiceTable;
 
         private DecisionTreeNode _root;
 
@@ -14,12 +14,12 @@ namespace AlgorithmsDataStructures5
 
         public DecisionTree()
         {
-            _table = new Dictionary<string, List<string>>();
+            _choiceTable = new Dictionary<string, List<string>>();
         }
 
         public DecisionTree(Dictionary<string, List<string>> table, string criterion)
         {
-            _table = table;
+            _choiceTable = table;
             _root = MakeDecisionTreeAndGetRoot(criterion);
             _nonCountedCriterions = table.Keys.ToList();
         }
@@ -63,12 +63,12 @@ namespace AlgorithmsDataStructures5
         {
             var parentEntropy = CalculateEntropy(table, parentCriterion);
 
-            var data = table[criterion];
-            var values = data.Distinct();
+            var choiceTableValue = table[criterion];
+            var values = choiceTableValue.Distinct();
             var result = 0.0;
             foreach (var item in values)
             {
-                var proportion = data.Where(x => x == item).Count()/(double)data.Count;
+                var proportion = choiceTableValue.Where(x => x == item).Count()/(double)choiceTableValue.Count;
                 result += proportion * CalculateEntropy(table, parentCriterion, criterion, item);
             }
             return parentEntropy - result;
@@ -80,9 +80,9 @@ namespace AlgorithmsDataStructures5
             if (_root != null && _root.Criterion == criterion) return _root;
 
             var root = new DecisionTreeNode(criterion);
-            _nonCountedCriterions = _table.Keys.Where(x => x != criterion).ToList();
-            var leafs = FormLeafs(criterion, _table[criterion]);
-            FormChilds(_table, root, criterion, leafs);
+            _nonCountedCriterions = _choiceTable.Keys.Where(x => x != criterion).ToList();
+            var leafs = FormLeafs(criterion, _choiceTable[criterion]);
+            FormChilds(_choiceTable, root, criterion, leafs);
             _root = root;
             return root;
         }
@@ -149,14 +149,14 @@ namespace AlgorithmsDataStructures5
         private string GetMaxGainCriterion(Dictionary<string, List<string>> table, string parentCriterion, List<string> otherCriterions)
         {
             if (otherCriterions.Count == 1) return otherCriterions[0];
-            var max = 0.0;
+            var maxGainCriterion = 0.0;
             string result = null;
             foreach (var criterion in otherCriterions)
             {
-                var cur = CalculateGain(table, parentCriterion, criterion);
-                if (cur > max)
+                var currentValueOfGain = CalculateGain(table, parentCriterion, criterion);
+                if (currentValueOfGain > maxGainCriterion)
                 {
-                    max = cur;
+                    maxGainCriterion = currentValueOfGain;
                     result = criterion;
                 }
             }

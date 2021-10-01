@@ -107,13 +107,13 @@ namespace AlgorithmsDataStructures
         public void Delete(T val)
         {
             // здесь будет ваш код
-            var found = Find(val);
-            if (found != null)
+            var nodeToDelete = Find(val);
+            if (nodeToDelete != null)
             {
-                if (found.prev != null) found.prev.next = found.next;
-                else head = found.next;
-                if (found.next != null) found.next.prev = found.prev;
-                else tail = found.prev;
+                if (nodeToDelete.prev != null) nodeToDelete.prev.next = nodeToDelete.next;
+                else head = nodeToDelete.next;
+                if (nodeToDelete.next != null) nodeToDelete.next.prev = nodeToDelete.prev;
+                else tail = nodeToDelete.prev;
             }
         }
 
@@ -137,17 +137,16 @@ namespace AlgorithmsDataStructures
             return counter; // здесь будет ваш код подсчёта количества элементов в списке
         }
 
-        List<Node<T>> GetAll() // выдать все элементы упорядоченного 
-            // списка в виде стандартного списка
+        List<Node<T>> GetAll() // выдать все элементы упорядоченного списка в виде стандартного списка
         {
-            List<Node<T>> r = new List<Node<T>>();
+            List<Node<T>> resultListOfNodes = new List<Node<T>>();
             Node<T> node = head;
             while (node != null)
             {
-                r.Add(node);
+                resultListOfNodes.Add(node);
                 node = node.next;
             }
-            return r;
+            return resultListOfNodes;
         }
     }
 

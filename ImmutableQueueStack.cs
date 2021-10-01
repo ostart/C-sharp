@@ -80,9 +80,9 @@ namespace AlgorithmsDataStructures5
         private ImmutableStack<T> CreateNewStack()
         {
             var newStack = new ImmutableStack<T>();
-            var array = _stack.ToArray();
-            Array.Reverse(array);
-            newStack._stack = new Stack<T>(array);
+            var stackValuesAsArray = _stack.ToArray();
+            Array.Reverse(stackValuesAsArray);
+            newStack._stack = new Stack<T>(stackValuesAsArray);
             return newStack;
         }
     }
