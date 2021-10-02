@@ -69,12 +69,12 @@ namespace AlgorithmsDataStructures2
 		{  
 			if(root_node == null) return true;
 			if(root_node.LeftChild == null && root_node.RightChild == null) return true;
-            var leftBalanced = IsBalanced(root_node.LeftChild);
-            var rightBalanced = IsBalanced(root_node.RightChild);
+            var isLeftBalanced = IsBalanced(root_node.LeftChild);
+            var isRightBalanced = IsBalanced(root_node.RightChild);
             var leftDepth = GetMaxDepth(root_node, false);
             var rightDepth = GetMaxDepth(root_node, true);
-            var correctLeftRigthDepth = Math.Abs(leftDepth - rightDepth) <= 1;
-            return leftBalanced && rightBalanced && correctLeftRigthDepth;
+            var isCorrectLeftRigthDepth = Math.Abs(leftDepth - rightDepth) <= 1;
+            return isLeftBalanced && isRightBalanced && isCorrectLeftRigthDepth;
 		}
 
         private static void ParseArray(int[] inputArray, int[] result, int parentIndex, bool isRight)

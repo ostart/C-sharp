@@ -35,9 +35,9 @@ namespace Tests
         [Test]
         public static void TestBubbleSortStep()
         {
-            var result = SortLevel.BubbleSortStep(_array);
+            var done = SortLevel.BubbleSortStep(_array);
             var ethalon = new int[] {3,1,2,4};
-            Assert.IsFalse(result);
+            Assert.IsFalse(done);
             Assert.AreEqual(ethalon.Length, _array.Length);
             for (int i = 0; i < _array.Length; i++)
             {

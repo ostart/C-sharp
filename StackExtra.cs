@@ -4,21 +4,20 @@ namespace AlgorithmsDataStructures
 {
     public class StackExtra
     {
-        public static bool IsBalances(string str)
+        public static bool IsBalances(string stringToCheck)
         {
             var stack = new Stack<char>();
-            var temp = str;
 
-            while (temp.Length > 0)
+            while (stringToCheck.Length > 0)
             {
-                if(temp[0] == '(')
-                    stack.Push(temp[0]);
-                if (temp[0] == ')')
+                if(stringToCheck[0] == '(')
+                    stack.Push(stringToCheck[0]);
+                if (stringToCheck[0] == ')')
                 {
                     if (stack.Size() == 0) return false;
                     stack.Pop();
                 }    
-                temp = temp.Substring(1);
+                stringToCheck = stringToCheck.Substring(1);
             }
 
             return stack.Size() == 0;

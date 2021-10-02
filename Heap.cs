@@ -56,9 +56,9 @@ namespace AlgorithmsDataStructures2
 
         private void Swap(int index, int current)
         {
-            var temp = HeapArray[index];
+            var valueForIndex = HeapArray[index];
             HeapArray[index] = HeapArray[current];
-            HeapArray[current] = temp;
+            HeapArray[current] = valueForIndex;
         }
 
         public bool Add(int key)

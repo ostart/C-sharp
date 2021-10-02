@@ -41,3 +41,80 @@ data - choiceTableValue
 table - choiceTable
 cur - currentValueOfGain
 max - maxGainCriterion
+
+
+7.1
+right - isRight
+leftBalanced - isLeftBalanced
+rightBalanced - isRightBalanced
+correctLeftRigthDepth - isCorrectLeftRigthDepth
+CheckPalindrome - IsPalindrome
+
+7.2
+result - found
+flag - success
+result - done
+
+
+7.3 
+for (int i = _levels; i >= 0; i--) // можно вместо i - currentLevel
+for (var i = nodesInLine.Count - 1; i >= 0; i--) // можно вместо i - currentNode
+
+7.4
+first = Find(first); second = Find(second); // можно вместо second использовать last
+for (int i = start; i <= stop; i++) // здесь пара start/stop. Stop можно переименовать в finish
+
+7.5
+private void Swap(int index, int current)
+{
+    var temp = HeapArray[index];
+    HeapArray[index] = HeapArray[current];
+    HeapArray[current] = temp;
+}
+заменён на:
+private void Swap(int index, int current)
+{
+    var valueForIndex = HeapArray[index]; // временная переменная переименована для наглядности
+    HeapArray[index] = HeapArray[current];
+    HeapArray[current] = valueForIndex;
+}
+
+
+public static bool IsBalances(string str)
+{
+    var stack = new Stack<char>();
+    var temp = str;
+
+    while (temp.Length > 0)
+    {
+        if(temp[0] == '(')
+            stack.Push(temp[0]);
+        if (temp[0] == ')')
+        {
+            if (stack.Size() == 0) return false;
+            stack.Pop();
+        }    
+        temp = temp.Substring(1);
+    }
+
+    return stack.Size() == 0;
+}
+заменён на:
+public static bool IsBalances(string stringToCheck)
+{
+    var stack = new Stack<char>();
+
+    while (stringToCheck.Length > 0) // избавился от временной переменной. Имя аргумента сделано более наглядным 
+    {
+        if(stringToCheck[0] == '(')
+            stack.Push(stringToCheck[0]);
+        if (stringToCheck[0] == ')')
+        {
+            if (stack.Size() == 0) return false;
+            stack.Pop();
+        }    
+        stringToCheck = stringToCheck.Substring(1);
+    }
+
+    return stack.Size() == 0;
+}
