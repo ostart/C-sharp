@@ -100,7 +100,7 @@ public static bool IsBalances(string str)
     return stack.Size() == 0;
 }
 заменён на:
-public static bool IsBalances(string stringToCheck) // Имя аргумента функции IsBalances сделано более наглядным
+public static bool IsBalances(string stringToCheck) // Имя аргумента функции IsBalances сделано более наглядным 
 {
     var stack = new Stack<char>();
 
