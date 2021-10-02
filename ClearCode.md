@@ -100,11 +100,11 @@ public static bool IsBalances(string str)
     return stack.Size() == 0;
 }
 заменён на:
-public static bool IsBalances(string stringToCheck)
+public static bool IsBalances(string stringToCheck) // Имя аргумента функции IsBalances сделано более наглядным
 {
     var stack = new Stack<char>();
 
-    while (stringToCheck.Length > 0) // избавился от временной переменной. Имя аргумента сделано более наглядным 
+    while (stringToCheck.Length > 0) // избавился от временной переменной temp
     {
         if(stringToCheck[0] == '(')
             stack.Push(stringToCheck[0]);
