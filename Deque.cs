@@ -5,31 +5,31 @@ namespace AlgorithmsDataStructures
 
     class Deque<T>
     {
-        private readonly LinkedList<T> list;
+        private readonly LinkedList<T> internalStorageList;
         public Deque()
         {
             // инициализация внутреннего хранилища
-            list = new LinkedList<T>();
+            internalStorageList = new LinkedList<T>();
         }
 
         public void AddFront(T item)
         {
             // добавление в голову
-            list.AddFirst(item);
+            internalStorageList.AddFirst(item);
         }
 
         public void AddTail(T item)
         {
             // добавление в хвост
-            list.AddLast(item);
+            internalStorageList.AddLast(item);
         }
 
         public T RemoveFront()
         {
             // удаление из головы
             if(Size() == 0) return default(T);
-            var head = list.First.Value;
-            list.RemoveFirst();
+            var head = internalStorageList.First.Value;
+            internalStorageList.RemoveFirst();
             return head;
         }
 
@@ -37,24 +37,24 @@ namespace AlgorithmsDataStructures
         {
             // удаление из хвоста
             if(Size() == 0) return default(T);
-            var tail = list.Last.Value;
-            list.RemoveLast();
+            var tail = internalStorageList.Last.Value;
+            internalStorageList.RemoveLast();
             return tail;
         }
 
         public int Size()
         {
-            return list.Count; // размер очереди
+            return internalStorageList.Count; // размер очереди
         }
 
         public T PeekFront()
         {
-            return list.First.Value;
+            return internalStorageList.First.Value;
         }
 
         public T PeekTail()
         {
-            return list.Last.Value;
+            return internalStorageList.Last.Value;
         }
     }
 

@@ -17,16 +17,16 @@ namespace AlgorithmsDataStructures5
             _choiceTable = new Dictionary<string, List<string>>();
         }
 
-        public DecisionTree(Dictionary<string, List<string>> table, string criterion)
+        public DecisionTree(Dictionary<string, List<string>> choiceTable, string criterion)
         {
-            _choiceTable = table;
+            _choiceTable = choiceTable;
             _root = MakeDecisionTreeAndGetRoot(criterion);
-            _nonCountedCriterions = table.Keys.ToList();
+            _nonCountedCriterions = choiceTable.Keys.ToList();
         }
 
-        public double CalculateEntropy(Dictionary<string, List<string>> table, string criterion)
+        public double CalculateEntropy(Dictionary<string, List<string>> choiceTable, string criterion)
         {
-            var data = table[criterion];
+            var data = choiceTable[criterion];
             var values = data.Distinct();
             var result = 0.0;
             foreach (var item in values)
@@ -37,10 +37,10 @@ namespace AlgorithmsDataStructures5
             return -1 * result;
         }
 
-        public double CalculateEntropy(Dictionary<string, List<string>> table, string parentCriterion, string criterion, string criterionValue)
+        public double CalculateEntropy(Dictionary<string, List<string>> choiceTable, string parentCriterion, string criterion, string criterionValue)
         {
-            var parentData = table[parentCriterion];
-            var data = table[criterion];
+            var parentData = choiceTable[parentCriterion];
+            var data = choiceTable[criterion];
             var resultData = new List<string>();
             for (int i = 0; i < data.Count; i += 1)
             {
@@ -59,17 +59,17 @@ namespace AlgorithmsDataStructures5
             return -1 * result;
         }
 
-        public double CalculateGain(Dictionary<string, List<string>> table, string parentCriterion, string criterion)
+        public double CalculateGain(Dictionary<string, List<string>> choiceTable, string parentCriterion, string criterion)
         {
-            var parentEntropy = CalculateEntropy(table, parentCriterion);
+            var parentEntropy = CalculateEntropy(choiceTable, parentCriterion);
 
-            var choiceTableValue = table[criterion];
+            var choiceTableValue = choiceTable[criterion];
             var values = choiceTableValue.Distinct();
             var result = 0.0;
             foreach (var item in values)
             {
                 var proportion = choiceTableValue.Where(x => x == item).Count()/(double)choiceTableValue.Count;
-                result += proportion * CalculateEntropy(table, parentCriterion, criterion, item);
+                result += proportion * CalculateEntropy(choiceTable, parentCriterion, criterion, item);
             }
             return parentEntropy - result;
         }
@@ -104,17 +104,17 @@ namespace AlgorithmsDataStructures5
             return TraverseTree(root, findParams);
         }
 
-        private void FormChilds(Dictionary<string, List<string>> table, DecisionTreeNode currentNode, string initialCriterion, Dictionary<string, DecisionTreeNode> leafs)
+        private void FormChilds(Dictionary<string, List<string>> choiceTable, DecisionTreeNode currentNode, string initialCriterion, Dictionary<string, DecisionTreeNode> leafs)
         {
-            string maxGainCriterion = GetMaxGainCriterion(table, initialCriterion, _nonCountedCriterions);
+            string maxGainCriterion = GetMaxGainCriterion(choiceTable, initialCriterion, _nonCountedCriterions);
             _nonCountedCriterions.Remove(maxGainCriterion);
-            var values = table[maxGainCriterion].Distinct();
+            var values = choiceTable[maxGainCriterion].Distinct();
             foreach (var value in values)
             {
                 var newChild = new DecisionTreeNode(maxGainCriterion, value);
                 if (currentNode.Childs == null) currentNode.Childs = new List<DecisionTreeNode>();
                 currentNode.Childs.Add(newChild);
-                var filteredTable = FilterTable(table, maxGainCriterion, value);
+                var filteredTable = FilterTable(choiceTable, maxGainCriterion, value);
                 var resultValues = filteredTable[initialCriterion].Distinct().ToList();
                 if (resultValues.Count == 1)
                 {
@@ -127,33 +127,33 @@ namespace AlgorithmsDataStructures5
             
         }
 
-        private Dictionary<string, List<string>> FilterTable(Dictionary<string, List<string>> table, string maxGainCriterion, string value)
+        private Dictionary<string, List<string>> FilterTable(Dictionary<string, List<string>> choiceTable, string maxGainCriterion, string value)
         {
             var result = new Dictionary<string, List<string>>();
-            var criterions = table.Keys.ToList();
-            for (int i = 0; i < table[maxGainCriterion].Count; i++)
+            var criterions = choiceTable.Keys.ToList();
+            for (int i = 0; i < choiceTable[maxGainCriterion].Count; i++)
             {
-                if (table[maxGainCriterion][i] == value)
+                if (choiceTable[maxGainCriterion][i] == value)
                 {
                     foreach (var criterion in criterions)
                     {
                         if (!result.ContainsKey(criterion)) result.Add(criterion, new List<string>());
                         if (result[criterion] == null) result[criterion] = new List<string>();
-                        result[criterion].Add(table[criterion][i]);
+                        result[criterion].Add(choiceTable[criterion][i]);
                     }
                 }
             }
             return result;
         }
 
-        private string GetMaxGainCriterion(Dictionary<string, List<string>> table, string parentCriterion, List<string> otherCriterions)
+        private string GetMaxGainCriterion(Dictionary<string, List<string>> choiceTable, string parentCriterion, List<string> otherCriterions)
         {
             if (otherCriterions.Count == 1) return otherCriterions[0];
             var maxGainCriterion = 0.0;
             string result = null;
             foreach (var criterion in otherCriterions)
             {
-                var currentValueOfGain = CalculateGain(table, parentCriterion, criterion);
+                var currentValueOfGain = CalculateGain(choiceTable, parentCriterion, criterion);
                 if (currentValueOfGain > maxGainCriterion)
                 {
                     maxGainCriterion = currentValueOfGain;

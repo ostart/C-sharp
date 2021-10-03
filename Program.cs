@@ -15,17 +15,17 @@ namespace C_sharp
             TestsLinkedList.TestClear();
             TestsLinkedList.TestInsertAfter();
 
-            var list1 = new LinkedList();
-            list1.AddInTail(new Node(1));
-            list1.AddInTail(new Node(2));
-            list1.AddInTail(new Node(3));
+            var firstTermList = new LinkedList();
+            firstTermList.AddInTail(new Node(1));
+            firstTermList.AddInTail(new Node(2));
+            firstTermList.AddInTail(new Node(3));
 
-            var list2 = new LinkedList();
-            list2.AddInTail(new Node(4));
-            list2.AddInTail(new Node(5));
-            list2.AddInTail(new Node(6));
+            var lastTermList = new LinkedList();
+            lastTermList.AddInTail(new Node(4));
+            lastTermList.AddInTail(new Node(5));
+            lastTermList.AddInTail(new Node(6));
 
-            var sum = LinkedListExtra.AddTogether(list1, list2);
+            var summaryList = LinkedListExtra.AddTogether(firstTermList, lastTermList);
 
             Console.WriteLine("Hello World!");
             Console.WriteLine("The current time is " + DateTime.Now);

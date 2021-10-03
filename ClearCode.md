@@ -118,3 +118,53 @@ public static bool IsBalances(string stringToCheck) // Имя аргумента
 
     return stack.Size() == 0;
 }
+
+
+7. Задания (12 примеров имён в вашем коде, которые следует избегать)
+1.
+было: private readonly LinkedList<T> list;
+стало: private readonly LinkedList<T> internalStorageList;
+
+2.
+было: public DecisionTree(Dictionary<string, List<string>> table, string criterion)
+стало: public DecisionTree(Dictionary<string, List<string>> choiceTable, string criterion)
+
+3.
+было: public double CalculateEntropy(Dictionary<string, List<string>> table, string parentCriterion, string criterion, string criterionValue)
+стало: public double CalculateEntropy(Dictionary<string, List<string>> choiceTable, string parentCriterion, string criterion, string criterionValue)
+
+4.
+было: public double CalculateEntropy(Dictionary<string, List<string>> table, string criterion)
+стало: public double CalculateEntropy(Dictionary<string, List<string>> choiceTable, string criterion)
+
+5.
+было: public double CalculateGain(Dictionary<string, List<string>> table, string parentCriterion, string criterion)
+стало: public double CalculateGain(Dictionary<string, List<string>> choiceTable, string parentCriterion, string criterion)
+
+6.
+было: private void FormChilds(Dictionary<string, List<string>> table, DecisionTreeNode currentNode, string initialCriterion, Dictionary<string, DecisionTreeNode> leafs)
+стало: private void FormChilds(Dictionary<string, List<string>> choiceTable, DecisionTreeNode currentNode, string initialCriterion, Dictionary<string, DecisionTreeNode> leafs)
+
+7.
+было: private Dictionary<string, List<string>> FilterTable(Dictionary<string, List<string>> table, string maxGainCriterion, string value)
+стало: private Dictionary<string, List<string>> FilterTable(Dictionary<string, List<string>> choiceTable, string maxGainCriterion, string value)
+
+8.
+было: private static Dictionary<string, List<string>> table;
+стало: private static Dictionary<string, List<string>> choiceTable;
+
+9.
+было: private string GetMaxGainCriterion(Dictionary<string, List<string>> table, string parentCriterion, List<string> otherCriterions)
+стало: private string GetMaxGainCriterion(Dictionary<string, List<string>> choiceTable, string parentCriterion, List<string> otherCriterions)
+
+10.
+было: var list1 = new LinkedList();
+стало: var firstTermList = new LinkedList();
+
+11.
+было: var list2 = new LinkedList();
+стало: var lastTermList = new LinkedList();
+
+12.
+было: var sum = LinkedListExtra.AddTogether(firstTermList, lastTermList);
+стало: var summaryList = LinkedListExtra.AddTogether(firstTermList, lastTermList);
