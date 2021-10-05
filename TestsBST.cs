@@ -126,16 +126,16 @@ namespace Tests
             twentytwo.LeftChild = twenty;
             var tree = new BST<int>(root);
 
-            var min = tree.FinMinMax(root, false);
+            var min = tree.FindMinOrMaxValueInSubTree(root, false);
             Assert.AreEqual(3, min.NodeKey);
 
-            var max = tree.FinMinMax(root, true);
+            var max = tree.FindMinOrMaxValueInSubTree(root, true);
             Assert.AreEqual(22, max.NodeKey);
 
-            var localMin = tree.FinMinMax(twentytwo, false);
+            var localMin = tree.FindMinOrMaxValueInSubTree(twentytwo, false);
             Assert.AreEqual(20, localMin.NodeKey);
 
-            var localMax = tree.FinMinMax(four, true);
+            var localMax = tree.FindMinOrMaxValueInSubTree(four, true);
             Assert.AreEqual(7, localMax.NodeKey);
         }
 

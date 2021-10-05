@@ -73,19 +73,19 @@ namespace AlgorithmsDataStructures2
             return true;
         }
 
-        public BSTNode<T> FinMinMax(BSTNode<T> FromNode, bool FindMax)
+        public BSTNode<T> FindMinOrMaxValueInSubTree(BSTNode<T> FromNode, bool FindMax)
         {
             // ищем максимальное/минимальное в поддереве
             if (FindMax)
             {
                 if (FromNode.RightChild != null)
-                    return FinMinMax(FromNode.RightChild, FindMax);
+                    return FindMinOrMaxValueInSubTree(FromNode.RightChild, FindMax);
                 return FromNode;
             }
             else
             {
                 if (FromNode.LeftChild != null)
-                    return FinMinMax(FromNode.LeftChild, FindMax);
+                    return FindMinOrMaxValueInSubTree(FromNode.LeftChild, FindMax);
                 return FromNode;
             }
         }
@@ -114,7 +114,7 @@ namespace AlgorithmsDataStructures2
                 return true;
             }
 
-            var minLeft = FinMinMax(node.Node.RightChild, false);
+            var minLeft = FindMinOrMaxValueInSubTree(node.Node.RightChild, false);
             if (minLeft.RightChild != null) // если есть у min ветка (RightChild) с большим значением
             {
                 minLeft.Parent.LeftChild = minLeft.RightChild;
@@ -152,17 +152,17 @@ namespace AlgorithmsDataStructures2
         public int Count()
         {
             var counter = 0;
-            CalcCount(Root, ref counter);
+            CalculateNodesInTreeToCounter(Root, ref counter);
             return counter; // количество узлов в дереве
         }
 
-        private static void CalcCount(BSTNode<T> node, ref int counter)
+        private static void CalculateNodesInTreeToCounter(BSTNode<T> node, ref int counter)
         {
             counter += 1;
             if (node.LeftChild != null)
-                CalcCount(node.LeftChild, ref counter);
+                CalculateNodesInTreeToCounter(node.LeftChild, ref counter);
             if (node.RightChild != null)
-                CalcCount(node.RightChild, ref counter);
+                CalculateNodesInTreeToCounter(node.RightChild, ref counter);
         }
 
         public List<BSTNode<T>> WideAllNodes()

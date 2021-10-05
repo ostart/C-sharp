@@ -168,3 +168,21 @@ public static bool IsBalances(string stringToCheck) // Имя аргумента
 12.
 было: var sum = LinkedListExtra.AddTogether(firstTermList, lastTermList);
 стало: var summaryList = LinkedListExtra.AddTogether(firstTermList, lastTermList);
+
+
+3.1. Улучшите пять имён классов в вашем коде.
+Data - Key
+Manager - TaskManager
+Settings - ApplicationSettings
+Executor - TaskExecutor
+JobData - JobDetails
+
+
+3.2. Улучшите семь имён методов и объектов по схеме из пункта 2.
+TimerTicks - TimerTicksInSeconds
+MinNumOfTasks - MinNumberOfTasks
+CreateNackResponse - ToNackResponse
+GetOpenApiMessageType - ToOpenApiMessageType
+ConvertToXmlString - ToXmlString
+FinMinMax - FindMinOrMaxValueInSubTree
+CalcCount - CalculateNodesInTreeToCounter

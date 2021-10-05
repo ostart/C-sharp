@@ -17,7 +17,7 @@ namespace AlgorithmsDataStructures4
             int result = int.MinValue;
             foreach (KeyValuePair<int, BinomialNode> item in Roots)
             {
-                if (item.Value.Data > result) result = item.Value.Data;
+                if (item.Value.Key > result) result = item.Value.Key;
             }
             return result;
         }
@@ -36,13 +36,13 @@ namespace AlgorithmsDataStructures4
             if (newNode.Degree != rootsNode.Degree) throw new InvalidOperationException("Forbidden to merge trees of different sizes");
             Roots.Remove(rootsNode.Degree);
             BinomialNode node;
-            if (newNode.Data > rootsNode.Data) {
-                node = new BinomialNode(newNode.Data, null, rootsNode, null, newNode.Degree + 1);
+            if (newNode.Key > rootsNode.Key) {
+                node = new BinomialNode(newNode.Key, null, rootsNode, null, newNode.Degree + 1);
                 rootsNode.Parent = node;
                 rootsNode.RightChild = newNode.LeftChild;
                 if (newNode.LeftChild != null) newNode.LeftChild.Parent = rootsNode;
             } else {
-                node = new BinomialNode(rootsNode.Data, null, newNode, null, rootsNode.Degree + 1);
+                node = new BinomialNode(rootsNode.Key, null, newNode, null, rootsNode.Degree + 1);
                 newNode.Parent = node;
                 newNode.RightChild = rootsNode.LeftChild;
                 if (rootsNode.LeftChild != null) rootsNode.LeftChild.Parent = newNode;
@@ -60,7 +60,7 @@ namespace AlgorithmsDataStructures4
 
     public class BinomialNode
     {
-        public int Data {get;set;}
+        public int Key {get;set;}
         public BinomialNode Parent {get;set;}
         public BinomialNode LeftChild {get;set;}
         public BinomialNode RightChild {get;set;}
@@ -68,7 +68,7 @@ namespace AlgorithmsDataStructures4
 
         public BinomialNode(int key, BinomialNode parent = null, BinomialNode left = null, BinomialNode right = null, int degree = 0)
         {
-            Data = key;
+            Key = key;
             Parent = parent;
             LeftChild = left;
             RightChild = right;
