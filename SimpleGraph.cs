@@ -104,7 +104,7 @@ namespace AlgorithmsDataStructures2
         stack.Push(vertex[finishIndex]);
         return;
       }
-      var nextIndex = GetNotVisited(adjacencyIndexes);
+      var nextIndex = GetNotVisitedVertexIndex(adjacencyIndexes);
       if(nextIndex == -1)
       {
         stack.Pop();
@@ -117,7 +117,7 @@ namespace AlgorithmsDataStructures2
         BuildDFS(nextIndex, finishIndex, stack);
     }
 
-    private int GetNotVisited(int[] adjacencyIndexes)
+    private int GetNotVisitedVertexIndex(int[] adjacencyIndexes)
     {
         foreach (var index in adjacencyIndexes)
         {
@@ -172,7 +172,7 @@ namespace AlgorithmsDataStructures2
         var nextIndex = -1;
         do
         {
-          nextIndex = GetNotVisited(adjacencyIndexes);
+          nextIndex = GetNotVisitedVertexIndex(adjacencyIndexes);
           if(nextIndex != -1)
           {
             vertex[nextIndex].Hit = true;

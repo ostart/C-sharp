@@ -15,7 +15,7 @@ namespace AlgorithmsDataStructuresHashTable
             for (int i = 0; i < size; i++) slots[i] = null;
         }
 
-        public int HashFun(string value)
+        public int CalculateHashFunction(string value)
         {
             // всегда возвращает корректный индекс слота
             var total = 0;
@@ -29,7 +29,7 @@ namespace AlgorithmsDataStructuresHashTable
         public int SeekSlot(string value)
         {
             // находит индекс пустого слота для значения, или -1
-            var initIndex = HashFun(value);
+            var initIndex = CalculateHashFunction(value);
             if (slots[initIndex] == null) return initIndex;
             var current = initIndex;
             do
@@ -41,7 +41,7 @@ namespace AlgorithmsDataStructuresHashTable
             return -1;
         }
 
-        public int Put(string value)
+        public int PutAndReturnNewSlotIndex(string value)
         {
             // записываем значение по хэш-функции
             var index = SeekSlot(value);
@@ -55,10 +55,10 @@ namespace AlgorithmsDataStructuresHashTable
             return -1;
         }
 
-        public int Find(string value)
+        public int FindSlotIndex(string value)
         {
             // находит индекс слота со значением, или -1
-            var initIndex = HashFun(value);
+            var initIndex = CalculateHashFunction(value);
             if (slots[initIndex] == value) return initIndex;
             var current = initIndex;
             do

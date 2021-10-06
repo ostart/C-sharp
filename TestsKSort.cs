@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using NUnit.Framework;
 using SortSpace;
 
@@ -10,19 +9,19 @@ namespace Tests
         public static void TestIndex()
         {
             var result = new KSort();
-            var i = result.index("a00");
+            var i = result.GetIndexAndMakeReplace("a00");
             Assert.AreEqual(0, i);
 
-            i = result.index("a01");
+            i = result.GetIndexAndMakeReplace("a01");
             Assert.AreEqual(1, i);
 
-            i = result.index("b64");
+            i = result.GetIndexAndMakeReplace("b64");
             Assert.AreEqual(164, i);
 
-            i = result.index("g99");
+            i = result.GetIndexAndMakeReplace("g99");
             Assert.AreEqual(699, i);
 
-            i = result.index("h99");
+            i = result.GetIndexAndMakeReplace("h99");
             Assert.AreEqual(799, i);
         }
 
@@ -36,10 +35,10 @@ namespace Tests
             Assert.IsFalse(result.add("w23"));
             Assert.IsFalse(result.add("a123"));
             var value = "A02";
-            var i = result.index(value);
+            var i = result.GetIndexAndMakeReplace(value);
             Assert.IsTrue(result.add(value));
             Assert.AreEqual(2, i);
-            Assert.AreEqual("A02", result.items[i]);
+            Assert.AreEqual("A02", result.Items[i]);
         }
     }
 }

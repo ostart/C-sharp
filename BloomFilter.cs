@@ -15,7 +15,7 @@ namespace AlgorithmsDataStructures
         }
 
         // хэш-функции
-        public int Hash1(string inputString)
+        public int CalculateFirstHashFunction(string inputString)
         {
             var counter = 0;
             // 17
@@ -27,7 +27,7 @@ namespace AlgorithmsDataStructures
             // реализация ...
             return counter;
         }
-        public int Hash2(string inputString)
+        public int CalculateSecondHashFunction(string inputString)
         {
             // 223
             // реализация ...
@@ -43,8 +43,8 @@ namespace AlgorithmsDataStructures
         public void Add(string inputString)
         {
             // добавляем строку inputString в фильтр
-            var indexFromHash1 = Hash1(inputString);
-            var indexFromHash2 = Hash2(inputString);
+            var indexFromHash1 = CalculateFirstHashFunction(inputString);
+            var indexFromHash2 = CalculateSecondHashFunction(inputString);
             bitArray.Set(indexFromHash1, true);
             bitArray.Set(indexFromHash2, true);
         }
@@ -52,8 +52,8 @@ namespace AlgorithmsDataStructures
         public bool IsValue(string inputString)
         {
             // проверка, имеется ли строка inputString в фильтре
-            var indexFromHash1 = Hash1(inputString);
-            var indexFromHash2 = Hash2(inputString);
+            var indexFromHash1 = CalculateFirstHashFunction(inputString);
+            var indexFromHash2 = CalculateSecondHashFunction(inputString);
             return bitArray[indexFromHash1] && bitArray[indexFromHash2];
         }
     }

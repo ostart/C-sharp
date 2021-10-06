@@ -186,3 +186,65 @@ GetOpenApiMessageType - ToOpenApiMessageType
 ConvertToXmlString - ToXmlString
 FinMinMax - FindMinOrMaxValueInSubTree
 CalcCount - CalculateNodesInTreeToCounter
+
+
+12 улучшений имён функций/методов в вашем коде в формате "было - стало - ваш комментарий"
+1.
+было: GetNotVisited
+стало: GetNotVisitedVertexIndex
+комментарий: не хватало наглядности
+
+2.
+было: TimerTicks
+стало: TimerTicksInSeconds
+комментарий: не хватало размерности
+
+3.
+было: DeleteNode
+стало: DeleteNodeByKey
+комментарий: добавлен параметр в имя, хотя возможно это избыточно, т.к. параметр ясен из имени аргумента функции
+
+4.
+было: CheckPalindrome
+стало: IsPalindrome
+комментарий: проще и нагляднее
+
+5.
+было: index
+стало: GetIndexAndMakeReplace
+комментарий: восстановлено правило именования функциий в C#, внесена конкретика и обозначен побочный эффект
+
+6.
+было: replace
+стало: ReplaceAndReturnNew
+комментарий: восстановлено правило именования функциий в C#, внесена конкретика
+
+7.
+было: CalcCount
+стало: CalculateNodesInTreeToGetCounter
+комментарий: добавлена наглядность и описание возвращаемого значения
+
+8.
+было: Find
+стало: FindSlotIndex
+комментарий: добавлена наглядность и описание возвращаемого значения
+
+9.
+было: Put
+стало: PutAndReturnNewSlotIndex
+комментарий: добавлена наглядность и обозначен побочный эффект
+
+10.
+было: HashFun
+стало: CalculateHashFunction
+комментарий: добавлена наглядность
+
+11.
+было: Hash1
+стало: CalculateFirstHashFunction
+комментарий: добавлена наглядность и устранены цифры в имени функции
+
+12.
+было: Hash2
+стало: CalculateSecondHashFunction
+комментарий: добавлена наглядность и устранены цифры в имени функции

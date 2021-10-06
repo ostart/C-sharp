@@ -152,17 +152,17 @@ namespace AlgorithmsDataStructures2
         public int Count()
         {
             var counter = 0;
-            CalculateNodesInTreeToCounter(Root, ref counter);
+            CalculateNodesInTreeToGetCounter(Root, ref counter);
             return counter; // количество узлов в дереве
         }
 
-        private static void CalculateNodesInTreeToCounter(BSTNode<T> node, ref int counter)
+        private static void CalculateNodesInTreeToGetCounter(BSTNode<T> node, ref int counter)
         {
             counter += 1;
             if (node.LeftChild != null)
-                CalculateNodesInTreeToCounter(node.LeftChild, ref counter);
+                CalculateNodesInTreeToGetCounter(node.LeftChild, ref counter);
             if (node.RightChild != null)
-                CalculateNodesInTreeToCounter(node.RightChild, ref counter);
+                CalculateNodesInTreeToGetCounter(node.RightChild, ref counter);
         }
 
         public List<BSTNode<T>> WideAllNodes()

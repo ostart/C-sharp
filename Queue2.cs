@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-
 namespace AlgorithmsDataStructures
 {
 
-   public class Queue2<T>
+    public class Queue2<T>
    {
       private readonly Stack<T> input;
       private readonly Stack<T> output;

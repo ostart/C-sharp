@@ -5,28 +5,28 @@ namespace SortSpace
 {
     public class KSort
   {
-      public string[] items;
+      public string[] Items;
 
       public KSort()
       {
-          items = new string[800];
+          Items = new string[800];
       }
 
       public KSort(string[] array)
       {
-          items = new string[800];
+          Items = new string[800];
           foreach (var item in array)
           {
               add(item);
           }
       }
 
-      public int index(string s)
+      public int GetIndexAndMakeReplace(string s)
       {
           var pattern = @"^[a-h]\d{2}$";
           if(Regex.IsMatch(s, pattern, RegexOptions.IgnoreCase))
           {
-              var afterReplace = replace(s);
+              var afterReplace = ReplaceAndReturnNew(s);
               return Convert.ToInt32(afterReplace);
           }
           else
@@ -35,14 +35,14 @@ namespace SortSpace
 
       public bool add(string s)
       {
-          var indexInItems = index(s);
+          var indexInItems = GetIndexAndMakeReplace(s);
           if(indexInItems == -1) 
             return false;
-          items[indexInItems] = s;
+          Items[indexInItems] = s;
           return true;
       }
 
-      private string replace(string s)
+      private string ReplaceAndReturnNew(string s)
       {
           string pattern_a = @"^a";
           Regex regex_a = new Regex(pattern_a, RegexOptions.IgnoreCase);

@@ -32,9 +32,9 @@ namespace Tests
             Assert.AreEqual(9, slot);
 
             var hashTable2 = new HashTable(3, 1);
-            hashTable2.Put("1");
-            hashTable2.Put("2");
-            hashTable2.Put("3");
+            hashTable2.PutAndReturnNewSlotIndex("1");
+            hashTable2.PutAndReturnNewSlotIndex("2");
+            hashTable2.PutAndReturnNewSlotIndex("3");
             Assert.AreEqual(-1, hashTable2.SeekSlot("4"));
         }
 
@@ -42,39 +42,39 @@ namespace Tests
         public static void TestHashTablePut()
         {
             var hashTable = new HashTable(19, 3);
-            hashTable.Put("Ro"); //3
+            hashTable.PutAndReturnNewSlotIndex("Ro"); //3
             Assert.AreEqual("Ro", hashTable.slots[3]);
-            hashTable.Put("R"); //6
+            hashTable.PutAndReturnNewSlotIndex("R"); //6
             Assert.AreEqual("R", hashTable.slots[6]);
-            hashTable.Put("Alphanumeric"); //6+3 =9
+            hashTable.PutAndReturnNewSlotIndex("Alphanumeric"); //6+3 =9
             Assert.AreEqual("Alphanumeric", hashTable.slots[9]);
-            hashTable.Put("Number"); //9+3=12
+            hashTable.PutAndReturnNewSlotIndex("Number"); //9+3=12
             Assert.AreEqual("Number", hashTable.slots[12]);
 
             var hashTable2 = new HashTable(3, 1);
-            hashTable2.Put("1");
-            hashTable2.Put("2");
-            hashTable2.Put("3");
-            Assert.AreEqual(-1, hashTable2.Put("4"));
+            hashTable2.PutAndReturnNewSlotIndex("1");
+            hashTable2.PutAndReturnNewSlotIndex("2");
+            hashTable2.PutAndReturnNewSlotIndex("3");
+            Assert.AreEqual(-1, hashTable2.PutAndReturnNewSlotIndex("4"));
 
             var hashTable3 = new HashTable(19,3);
             for(var i = 1; i <= 100; i++)
-                Assert.DoesNotThrow(() => hashTable3.Put(i.ToString()));
+                Assert.DoesNotThrow(() => hashTable3.PutAndReturnNewSlotIndex(i.ToString()));
         }
 
         [Test]
         public static void TestHashTableFind()
         {
             var hashTable = new HashTable(19, 3);
-            hashTable.Put("Ro"); //3
-            hashTable.Put("R"); //6
-            hashTable.Put("Alphanumeric"); //6+3 =9
-            hashTable.Put("Number"); //9+3=12
-            Assert.AreEqual(3, hashTable.Find("Ro"));
-            Assert.AreEqual(6, hashTable.Find("R"));
-            Assert.AreEqual(9, hashTable.Find("Alphanumeric"));
-            Assert.AreEqual(12, hashTable.Find("Number"));
-            Assert.AreEqual(-1, hashTable.Find("C#"));
+            hashTable.PutAndReturnNewSlotIndex("Ro"); //3
+            hashTable.PutAndReturnNewSlotIndex("R"); //6
+            hashTable.PutAndReturnNewSlotIndex("Alphanumeric"); //6+3 =9
+            hashTable.PutAndReturnNewSlotIndex("Number"); //9+3=12
+            Assert.AreEqual(3, hashTable.FindSlotIndex("Ro"));
+            Assert.AreEqual(6, hashTable.FindSlotIndex("R"));
+            Assert.AreEqual(9, hashTable.FindSlotIndex("Alphanumeric"));
+            Assert.AreEqual(12, hashTable.FindSlotIndex("Number"));
+            Assert.AreEqual(-1, hashTable.FindSlotIndex("C#"));
         }
     }
 }
