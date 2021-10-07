@@ -9,13 +9,13 @@ namespace Tests
         public static void TestHashTableHashFun()
         {
             var hashTable = new HashTable(19, 3);
-            Assert.AreEqual(6, hashTable.HashFun("R"));
-            Assert.AreEqual(3, hashTable.HashFun("Ro"));
-            Assert.AreEqual(17, hashTable.HashFun("Rom"));
-            Assert.AreEqual(0, hashTable.HashFun("Roma"));
-            Assert.AreEqual(15, hashTable.HashFun("Roman"));
-            Assert.AreEqual(6, hashTable.HashFun("Alphanumeric"));
-            Assert.AreEqual(9, hashTable.HashFun("Number"));
+            Assert.AreEqual(6, hashTable.CalculateHashFunction("R"));
+            Assert.AreEqual(3, hashTable.CalculateHashFunction("Ro"));
+            Assert.AreEqual(17, hashTable.CalculateHashFunction("Rom"));
+            Assert.AreEqual(0, hashTable.CalculateHashFunction("Roma"));
+            Assert.AreEqual(15, hashTable.CalculateHashFunction("Roman"));
+            Assert.AreEqual(6, hashTable.CalculateHashFunction("Alphanumeric"));
+            Assert.AreEqual(9, hashTable.CalculateHashFunction("Number"));
         }
 
         [Test]

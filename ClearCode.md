@@ -248,3 +248,41 @@ CalcCount - CalculateNodesInTreeToCounter
 было: Hash2
 стало: CalculateSecondHashFunction
 комментарий: добавлена наглядность и устранены цифры в имени функции
+
+3.1. Сделайте в своём коде три примера наглядных методов-фабрик
+На C# не нашёл. Нашёл в коде на JS
+1) Точка в декартовом пространстве с внутренним представлением в полярных координатах
+const makeDecartPoint = (x, y) => {
+  return {
+    angle: Math.atan2(y, x),
+    radius: Math.sqrt(x ** 2 + y ** 2)
+  };
+}
+2) Рациональное число с чилителем и знаменателем
+const makeRational = (numer, denom) => `${numer}/${denom}`;
+const num = makeRational(numer, denom);
+3) Различные конверторы, например:
+public static DateTime XmlToDateTime(XmlNode node)
+{
+    var year = Convert.ToInt32(node["Year"]?.InnerText);
+    var month = Convert.ToInt32(node["Month"]?.InnerText);
+    var day = Convert.ToInt32(node["Day"]?.InnerText);
+    var hour = Convert.ToInt32(node["Hour"]?.InnerText);
+    var minute = Convert.ToInt32(node["Minute"]?.InnerText);
+    return new DateTime(year, month, day, hour, minute, 0);
+}
+
+3.2. Если вы когда-нибудь использовали интерфейсы или абстрактные классы, напишите несколько примеров их правильного именования
+было:
+internal interface IAssemblerInterpreter
+public class AssemblerInterpreter : IAssemblerInterpreter
+стало:
+internal interface AssemblerInterpreter
+public class AssemblerInterpreterImp : AssemblerInterpreter
+
+было:
+public interface IBookRepository
+public class BookRepository: IBookRepository
+стало:
+public interface BookRepository
+public class BookRepositoryImp: BookRepository

@@ -22,7 +22,7 @@ namespace Tests
             var testFilter = new BloomFilter(32);
             Assert.AreEqual(32, testFilter.bitArray.Length);       
             Assert.AreEqual(32, testFilter.filter_length);       
-            Assert.AreEqual(13, testFilter.Hash1(zero));
+            Assert.AreEqual(13, testFilter.CalculateFirstHashFunction(zero));
             foreach(bool item in testFilter.bitArray)
                 Assert.IsTrue(item == false);
         }
@@ -33,7 +33,7 @@ namespace Tests
             var testFilter = new BloomFilter(32);
             Assert.AreEqual(32, testFilter.bitArray.Length);       
             Assert.AreEqual(32, testFilter.filter_length);   
-            Assert.AreEqual(5, testFilter.Hash2(zero));
+            Assert.AreEqual(5, testFilter.CalculateSecondHashFunction(zero));
             foreach(bool item in testFilter.bitArray)
                 Assert.IsTrue(item == false);
         }
