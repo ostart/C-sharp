@@ -286,3 +286,18 @@ public class BookRepository: IBookRepository
 стало:
 public interface BookRepository
 public class BookRepositoryImp: BookRepository
+
+
+Внесите 12 правок в свой код, в которых улучшите работу с константами, и напишите по каждой, что конкретно вы улучшили
+1. const string StatusCoverOpen = '3'; // уточнено, что это именно именованная константа статуса
+2. const string StatusPaperJam = '8'; // уточнено, что это именно именованная константа статуса
+3. const string StatusInputEmpty = '808'; // уточнено, что это именно именованная константа статуса
+4. private const string DelimiterInCsvFiles = ";"; // уточнено, что разделитель именно в CSV файлах
+5. private const int FilePackSizePerDequeuing = 10000; // количество файлов вытаскиваемых из очереди за один шаг
+6. private const int DefaultDeviceId = 0; // идентификатор устройства по умолчанию
+7. private const int LocalDeviceId = 100000; // идентификтор локального устройства
+8. private const string MacAddressSeparator = ";"; // уточнил, что это разделитель в Мас-адресах
+9. private const int MaximalUrlLength = 2000; // максимальная длина Url
+10. private const int MaximalFilenameLength = 256; // максимальная длина имени файла
+11. public const string ManualIntegration = "Manual"; // учтонил, что именно ручной тип интеграции
+12. private const int NotYetDefinedStatus = 0; // уточнил, что константа ещё не установленного статуса именно для статуса
