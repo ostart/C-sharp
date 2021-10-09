@@ -301,3 +301,48 @@ public class BookRepositoryImp: BookRepository
 10. private const int MaximalFilenameLength = 256; // максимальная длина имени файла
 11. public const string ManualIntegration = "Manual"; // учтонил, что именно ручной тип интеграции
 12. private const int NotYetDefinedStatus = 0; // уточнил, что константа ещё не установленного статуса именно для статуса
+
+Типы данных. Внесите 12 правок в свой код с учётом рекомендаций, и напишите по каждой, как и что конкретно вы улучшили
+1. 
+было: if (count + 1 > capacity) MakeArray(capacity * 2);
+стало: 
+var needToDobleTheSize = count + 1 > capacity; // введена говорящая логическая переменная
+if (needToDobleTheSize) MakeArray(capacity * 2);
+2. 
+было: if (index < 0 || index > count) throw new ArgumentOutOfRangeException("index");
+стало:
+var isIndexOutOfRange = index < 0 || index > count; // введена говорящая логическая переменная
+if (isIndexOutOfRange) throw new ArgumentOutOfRangeException("index");
+3. 
+было: if(count < capacity / 2) MakeArray(capacity * 2 / 3);
+стало:
+var needToReduceTheSize = count < capacity / 2; // введена говорящая логическая переменная
+if(needToReduceTheSize) MakeArray(capacity * 2 / 3);
+4. double actualResult = decisionTree.CalculateEntropy(choiceTable, "Play Tennis"); // применён double вместо float
+5. Assert.AreEqual(0.94, actualResult, 0.001); // сравнение double сделано с заданием точности, а не на равенство
+6. var proportion = choiceTableValue.Where(x => x == item).Count()/(double)choiceTableValue.Count; // вынужден сделать приведение знаменателя к double из-за того, что по умолчанию деление / даёт в результате целочисленное значение типа int
+7. 
+было:
+var d1 = Convert.ToDouble(var1);
+var d2 = Convert.ToDouble(var2);
+if (d1 > d2) result = 1;
+стало:
+var d1 = Convert.ToDecimal(var1);
+var d2 = Convert.ToDecimal(var2);
+if (d1 > d2) result = 1; // Decimal намного точнее чем Double. Сравнение и операции с деньгами лучше производить в Decimal
+8. 
+было: const int decimalValue = 0;
+стало: const int initialValue = 0; // это вообще шедевр обмана. В тоге и не Decimal совсем
+9. Math.Round(targetValue * (decimal)avgPageCost, 2, MidpointRounding.AwayFromZero).ToString(CultureInfo.InvariantCulture);  // double заменён на decimal
+10. public JsonContent(object obj) : base(obj.SerializeJson(), Encoding.Unicode, "application/json") { } // UTF8 заменён на Unicode
+11. 
+// DivideByZeroException возникает только при работе с целочисленными значениями и decimal. При работе с числами с плавающей запятой при делении на ноль получаем  значение «бесконечности». Тогда необзодимо проверять знаменатель на ноль
+было: int result = arg1 / arg2;
+стало: if (arg2 != 0) int result = arg1 / arg2;
+12. Интернационализация поддержана из коробки файлом ресурсов .resx
+<data name="NotFound" xml:space="preserve">
+    <value>Сущность &lt;{0}&gt; не найдена</value>
+</data>
+<data name="NotFound" xml:space="preserve">
+    <value>Entity &lt;{0}&gt; is not found</value>
+</data>

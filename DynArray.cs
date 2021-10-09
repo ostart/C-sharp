@@ -40,14 +40,16 @@ namespace AlgorithmsDataStructures
 
         public void Append(T itm)
         {
-            if (count + 1 > capacity) MakeArray(capacity * 2);
+            var needToDobleTheSize = count + 1 > capacity;
+            if (needToDobleTheSize) MakeArray(capacity * 2);
             array[count] = itm;
             count += 1;
         }
 
         public void Insert(T itm, int index)
         {
-            if (index < 0 || index > count) throw new ArgumentOutOfRangeException("index");
+            var isIndexOutOfRange = index < 0 || index > count;
+            if (isIndexOutOfRange) throw new ArgumentOutOfRangeException("index");
             if (count + 1 > capacity) MakeArray(capacity*2);
             if(index == count) Append(itm);
             else
@@ -69,7 +71,8 @@ namespace AlgorithmsDataStructures
             Array.Copy(array, index + 1, tempArray, index, count - index - 1);
             array = tempArray;
             count -= 1;
-            if(count < capacity / 2) MakeArray(capacity * 2 / 3);
+            var needToReduceTheSize = count < capacity / 2;
+            if(needToReduceTheSize) MakeArray(capacity * 2 / 3);
         }
 
     }
