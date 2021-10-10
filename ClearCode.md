@@ -346,3 +346,126 @@ if (d1 > d2) result = 1; // Decimal намного точнее чем Double. �
 <data name="NotFound" xml:space="preserve">
     <value>Entity &lt;{0}&gt; is not found</value>
 </data>
+
+Переменные и их значения. Внесите 15 правок в свой код с учётом рекомендаций и напишите по каждой, что конкретно вы улучшили:
+1. result является аккумулятором, инициализирована нулём и помещена прямо перед циклом
+var result = 0.0;
+foreach (var item in values)
+{
+    var proportion = choiceTableValue.Where(x => x == item).Count()/(double)choiceTableValue.Count;
+    result += proportion * CalculateEntropy(choiceTable, parentCriterion, criterion, item);
+}
+
+2. sumOfWeights является аккумулятором, инициализирована нулём и помещена прямо перед циклом
+var sumOfWeights = 0m;
+for (int i = 0; i < weigths.GetLength(0); i++)
+    for (int j = 0; j < weigths.GetLength(1); j++)
+        sumOfWeights += weigths[i,j] * input[i,j];
+
+3. total является аккумулятором, инициализирована нулём и помещена прямо перед циклом
+var total = 0;
+for (var i = 0; i <= charArray.GetUpperBound(0); i++)
+    total += (int)charArray[i];
+
+4. total является аккумулятором, инициализирована нулём и помещена прямо перед циклом
+var total = 0;
+for (var i = 0; i <= c.GetUpperBound(0); i++)
+    total += c[i];
+
+5. Переменная i объявлена непостредственно в цикле и уничтожается сразу по выходу из него
+for (int i = 0; i < data.Count; i += 1)
+{
+    if (data[i] == criterionValue) resultData.Add(parentData[i]);
+}
+
+6. Валидация перед использованием переменной
+if (criterion == null) return _root;
+
+7. Валидация перед использованием переменной
+if (_root != null && _root.Criterion == criterion) return _root;
+
+8. Счетчик и аккумулятор объявлены прямо пред циклом и после возвращения уничтожаются
+var counter = 0;
+var result = new List<int>();
+while(str.IndexOf(sign,counter) != -1)
+{
+    result.Add(str.IndexOf(sign,counter));
+    counter = str.IndexOf(sign,counter) + 1;
+}
+return result;
+
+9. Счетчик объявлен непосредственно перед циклом
+var counter = 0;
+while(true)
+{
+    block.Nonce = counter;
+    var hash = Hash(block);
+    var match = Regex.Match(hash, "0{" + NumberOfZeros + "}$");
+    if (match.Success) return hash;
+    counter += 1;
+}
+
+10. Счетчик объявлен непосредственно перед циклом
+var counter = 0;
+do
+{
+    currentNode = RandomStep(currentNode);
+    counter += 1;
+}while(currentNode.Index != stopIndex);
+
+11. head объявлена непосредственно перед использование в цикле
+private T GetHead()
+{
+    while(input.Size() > 0) output.Push(input.Pop());
+    var head = output.Pop();
+    while(output.Size() > 0) input.Push(output.Pop());
+    return head;
+}
+
+12. Счетчик смещён прямо перед объявлением цикла. В цикле проверка инварианта в коде
+var node = list.head;
+var counter = -1;
+while (node != null)
+{
+    Assert.AreEqual(counter, node.value, "Test TestAddOrderedListIntAsc failed. List sequence is not correct");
+    counter += 1;
+    node = node.next;
+}
+
+13. Здесь вообще всё идеально в итоге. Короткая функция, переменные цикла объявлены как аргументы функции и уничтожаются при выходе
+public static void QuickSortTailOptimization(int[] array, int left, int right)
+{
+    while (left < right)
+    {
+        int pivot = ArrayChunk(array, left, right);
+        QuickSortTailOptimization(array, left, pivot - 1);
+        left = pivot + 1;
+    }
+}
+
+14. В конструкторе инициализируются все переменные и дерево
+public aBST(int depth)
+{
+    // правильно рассчитайте размер массива для дерева глубины depth:
+    var tree_size = 0;
+    for (var i = 0; i <= depth; i++) tree_size += (int)Math.Pow(2, i);
+    Tree = new int?[tree_size];
+    for (var i = 0; i < tree_size; i++) Tree[i] = null;
+}
+
+15. Все переменные объявлены как readonly и инициализированы в конструкторе
+public class DSU<T>
+{
+    private readonly Dictionary<T, T> _parent;
+    // Ранг дерева >= высоты дерева
+    private readonly Dictionary<T, int> _rank;
+    private readonly Random _rand;
+
+    public DSU()
+    {
+        _parent = new Dictionary<T, T>();
+        _rank = new Dictionary<T, int>();
+        _rand = new Random();
+    }
+...
+

@@ -18,8 +18,8 @@ namespace AlgorithmsDataStructures
 
         public int HashFun(string value)
         {
-            var total = 0;
             var c = value.ToCharArray();
+            var total = 0;
             for (var i = 0; i <= c.GetUpperBound(0); i++)
                 total += c[i];
 

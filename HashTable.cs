@@ -18,8 +18,8 @@ namespace AlgorithmsDataStructuresHashTable
         public int CalculateHashFunction(string value)
         {
             // всегда возвращает корректный индекс слота
-            var total = 0;
             var charArray = value.ToCharArray();
+            var total = 0;
             for (var i = 0; i <= charArray.GetUpperBound(0); i++)
                 total += (int)charArray[i];
 
