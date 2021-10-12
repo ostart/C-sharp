@@ -469,3 +469,20 @@ public class DSU<T>
     }
 ...
 
+Время жизни переменных. Внесите 15 правок в свой код с учётом рекомендаций из данного занятия, и напишите, что конкретно вы улучшили
+1. internal int? [] Tree; // массив ключей сделан менее доступным
+2. internal int NodeKey; // ключ узла сделан менее доступным 
+3. internal BSTNode Parent; // родитель или null для корня сделан менее доступным
+4. internal BSTNode LeftChild; // левый потомок сделан менее доступным
+5. internal BSTNode RightChild; // правый потомок сделан менее доступным
+6. internal int Level; // глубина узла сделана менее доступной
+7. internal int Left; // сделан менее доступным
+8. internal int Right; // сделан менее доступным
+9. private int _result; // переименована и сделана закрытой
+10. private int[] _sortedArray; // переименован и сделан закрытым
+11. private int NumberOfZeros {get;set;} // сделана закрытой
+12. internal int filter_length; // длина фильтра сделана менее доступной
+13. internal BitArray bitArray; // массив сделан менее доступным
+14. internal BSTNode<T> Node; // поле сделано менее доступным
+15. internal bool NodeHasKey; // поле сделано менее доступным
+16. internal bool ToLeft; // флаг сделан менее доступным

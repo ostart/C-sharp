@@ -2,9 +2,9 @@ using System;
 
 namespace AlgorithmsDataStructures2
 {
-    public class aBST
+  public class aBST
   {
-    public int? [] Tree; // массив ключей
+    internal int? [] Tree; // массив ключей
 	
     public aBST(int depth)
     {

@@ -4,8 +4,8 @@ namespace AlgorithmsDataStructures
 {
     public class BloomFilter
     {
-        public int filter_length;
-        public BitArray bitArray;
+        internal int filter_length;
+        internal BitArray bitArray;
 
         public BloomFilter(int filterLength)
         {

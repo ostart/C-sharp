@@ -4,11 +4,11 @@ namespace AlgorithmsDataStructures2
 {
     public class BSTNode
       {
-        public int NodeKey; // ключ узла
-        public BSTNode Parent; // родитель или null для корня
-        public BSTNode LeftChild; // левый потомок
-        public BSTNode RightChild; // правый потомок	
-        public int     Level; // глубина узла
+        internal int NodeKey; // ключ узла
+        internal BSTNode Parent; // родитель или null для корня
+        internal BSTNode LeftChild; // левый потомок
+        internal BSTNode RightChild; // правый потомок	
+        internal int     Level; // глубина узла
 	
         public BSTNode(int key, BSTNode parent)
          {

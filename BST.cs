@@ -24,13 +24,13 @@ namespace AlgorithmsDataStructures2
     public class BSTFind<T>
     {
         // null если не найден узел, и в дереве только один корень
-        public BSTNode<T> Node;
+        internal BSTNode<T> Node;
 
         // true если узел найден
-        public bool NodeHasKey;
+        internal bool NodeHasKey;
 
         // true, если родительскому узлу надо добавить новый левым
-        public bool ToLeft;
+        internal bool ToLeft;
 
         public BSTFind() { Node = null; }
     }
