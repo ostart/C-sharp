@@ -487,7 +487,114 @@ public class DSU<T>
 15. internal bool NodeHasKey; // поле сделано менее доступным
 16. internal bool ToLeft; // флаг сделан менее доступным
 
+
 Время связывания переменных. 3 примера с разбором различного времени связывания. Поясните, почему был сделан такой выбор
 1. private const int LOG_OUTPUT_TYPE = 8; // Связывание во время компиляции. Этого уровня достаточно потому что при запуске программы уровень изменять не предполагается
 2. var port = ConfigurationManager.AppSettings["Port"]; // Связывание во время выполнения программы из файла конфигурации. Повышает гибкость изменять настройки без перекомпиляции проекта. Считывается во время инициализации программы в конструкторе
 3. var modelSemantics = SettingsManagement.GetModelSemantics(AppDomain.CurrentDomain.BaseDirectory + "semantics.json"); // Связывание во время выполнения программы из файла. Повышает гибкость изменять список рабочих семантик без перекомпиляции проекта. Считывается при первом обращении к семантикам службы
+
+
+Приведите 5 примеров кода, где вместо массивов можно использовать более безопасные структуры данных, или же работа с массивами может выполняться без их прямой индексации:
+Отметил для себя, что невозможно в различных классические алгоритмах поиска, сортировки и т.д. заменить массивы структурами с последовательным доступом. Поэтому рекомендацию отказаться от использования массивов в пользу структур с последовательным доступом рассматриваю как академическую шизу
+1. Стэк удобно использовать для анализа скобочных выражений, чтобы проверять что открывающиеся скобки имеют соответствующие закрывающиеся
+public static bool IsCorrect(string str)
+{
+    var pairs = new Dictionary<char, char>();
+    pairs.Add('(', ')');
+    pairs.Add('[', ']');
+    var stack = new Stack<char>();
+    foreach (var e in str)
+    {
+        if (pairs.ContainsKey(e)) stack.Push(e);
+        else if (pairs.ContainsValue(e))
+        {
+            if (stack.Count == 0 || pairs[stack.Pop()] != e) return false;
+        }
+        else return false;
+    }
+    return stack.Count == 0;
+}
+
+2. Стэк удобно использовать для вычислений выражений, полученных в результате анализа синтаксического дерева (обратная польская запись)
+static int Compute(string str)
+{
+	var operations = new Dictionary<char, Func<int, int, int>>();
+	operations.Add('+', (y, x) => x + y);
+	operations.Add('-', (y, x) => x - y);
+	operations.Add('*', (y, x) => x * y);
+	operations.Add('/', (y, x) => x / y);
+
+	var stack = new Stack<int>();
+	foreach (var e in str)
+	{
+		if (e <= '9' && e >= '0')
+			stack.Push(e - '0');
+		else if (operations.ContainsKey(e))
+			stack.Push(operations[e](stack.Pop(), stack.Pop()));
+		else
+			throw new ArgumentException();
+	}
+	return stack.Pop();
+}
+
+3. Использование очереди для вычисления скользящего среднего на лету в зависимости от размера буфера
+public class Averager
+{
+    Sensor sensor;
+    Queue<double> queue;
+    int bufferLength;
+    double sum;
+    public Averager(Sensor sensor, int bufferLength)
+    {
+        this.bufferLength = bufferLength;
+        this.sensor = sensor;
+        queue = new Queue<double>();
+    }
+
+    public double Measure()
+    {
+        var value = sensor.Measure();
+        queue.Enqueue(value);
+        sum += value;
+        if (queue.Count > bufferLength)
+        {
+            sum -= queue.Dequeue();
+        }
+        return sum / queue.Count;
+    }
+}
+
+4. Очереди используются в шине или брокере сообщений
+public static HandlerBuilder<TRequest, TResponse> Queue<TRequest, TResponse>(this Builder<TRequest, TResponse> builder, string queue)
+{
+    if (builder is null) throw new ArgumentNullException(nameof(builder));
+
+    var b = new HandlerBuilder<TRequest, TResponse>(queue, builder.Settings);
+    b.ConsumerSettings.PathKind = PathKind.Queue;
+    return b;
+}
+
+5. Стэки используются для обхода деревьев и графов
+private void BuildDFS(int currentIndex, int finishIndex, Stack<Vertex<T>> stack)
+{
+    var current = vertex[currentIndex];
+    current.Hit = true;
+    stack.Push(current);
+    int[] adjacencyIndexes = GetAdjacencyIndexes(currentIndex);
+    if(Array.Exists(adjacencyIndexes, item => item == finishIndex))
+    {
+    stack.Push(vertex[finishIndex]);
+    return;
+    }
+    var nextIndex = GetNotVisitedVertexIndex(adjacencyIndexes);
+    if(nextIndex == -1)
+    {
+    stack.Pop();
+    if(stack.Count == 0) return;
+    var next = stack.Pop();
+    var index = Array.FindIndex(vertex, item => item == next);
+    BuildDFS(index, finishIndex, stack);
+    }
+    else 
+    BuildDFS(nextIndex, finishIndex, stack);
+}
