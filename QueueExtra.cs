@@ -1,5 +1,3 @@
-using System;
-
 namespace AlgorithmsDataStructures
 {
     public static class QueueExtra

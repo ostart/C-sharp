@@ -6,8 +6,7 @@ namespace AlgorithmsDataStructures4
     public class DSU<T>
     {
         private readonly Dictionary<T, T> _parent;
-        // Ранг дерева >= высоты дерева
-        private readonly Dictionary<T, int> _rank;
+        private readonly Dictionary<T, int> _rank; // Ранг дерева >= высоты дерева
         private readonly Random _rand;
 
         public DSU()

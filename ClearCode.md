@@ -598,3 +598,20 @@ private void BuildDFS(int currentIndex, int finishIndex, Stack<Vertex<T>> stack)
     else 
     BuildDFS(nextIndex, finishIndex, stack);
 }
+
+
+3.1. Прокомментируйте 7 мест в своём коде там, где это явно уместно
+1. private int _result; // 0-search; 1-found; -1-not found
+2. public class BSTFind<T> // промежуточный результат поиска
+3. internal bool ToLeft; // true, если родительскому узлу надо добавить новый левым
+4. private readonly Dictionary<T, int> _rank; // Ранг дерева >= высоты дерева
+5. public int CalculateHashFunction(string value) // всегда возвращает корректный индекс слота
+6. public int [] HeapArray; // хранит неотрицательные числа-ключи
+7. public int [] BSTArray; // временный массив для ключей дерева
+
+3.2. Если вы раньше делали комментарии к коду, найдите 5 мест, где комментарии излишни, удалите их и сделайте сам код более наглядным
+1. bitArray = new BitArray(filter_length); // создаём битовый массив длиной filter_length ...    
+2. public int CalculateFirstHashFunction(string inputString) // хэш-функции
+3. public void Add(string inputString) // добавляем строку inputString в фильтр
+4. public bool IsValue(string inputString) // проверка, имеется ли строка inputString в фильтре
+5. public int NodeKey; // ключ узла
