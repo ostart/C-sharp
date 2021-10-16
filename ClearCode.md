@@ -615,3 +615,32 @@ private void BuildDFS(int currentIndex, int finishIndex, Stack<Vertex<T>> stack)
 3. public void Add(string inputString) // добавляем строку inputString в фильтр
 4. public bool IsValue(string inputString) // проверка, имеется ли строка inputString в фильтре
 5. public int NodeKey; // ключ узла
+
+
+Правильные комментарии. Внесите 12 правок в комментарии, указывая, по какому из пунктов была сделана правка
+Информативные комментарии:
+1. public void MethodA() //метод A распределяет список существующих задач между исполнителями по принципу round - robin
+2. public void MethodB() //метод B перераспределяет задачи: все первые задачи каждого исполнителя переходят к следующему исполнителю(помещаются в начало списка задач).Задача последнего исполнителя переходит к первому исполнителю. Остальные задачи не трогаются.
+TODO коментарии + Представление намерений:
+3. // TODO: currently there is only one device per ip support; logic should be changed later
+4. // TODO: Make DefaultConventionalRegistrar extensible, so we can only define GetLifeTimeOrNull to contribute to the convention. This can be more performant!
+5. // TODO: revert to 2 minutes after front adaptation
+Прояснение:
+6. // Can return multiple identities, not one
+Предупреждения о последствиях:
+7. // !!! WARNING !!! Assumes normalized dateFrom and dateTo according to granularity. If not return incorrect shifted results
+8. //use this method with dateFrom dateTo. do not remove
+private async Task<Dictionary<int, int>> CalculatePrintCountForPeriod(List<int> employeeIds, Guid semanticId)
+9. 
+private byte[] DecryptTextToBytes(string text)
+{
+    text = text.Replace(' ', '-'); //do not remove! Important delimiter for Decrypt
+    return Decrypt(Convert.FromBase64String(text), _aes);
+}
+Усиление:
+10. // IMPORTANT: This needs to be added *before* configuration is loaded, this lets the defaults be overridden by the configuration
+Предупреждения + Прояснение:
+11. // Don't delete! This code configures Web API. The Startup class is specified as a type parameter in the WebApp.Start method
+public void Configuration(IAppBuilder appBuilder)
+Прояснение:
+12. var config = new HttpConfiguration(); // Configure Web API for self-host
