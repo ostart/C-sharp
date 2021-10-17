@@ -12,10 +12,10 @@ namespace Tests
             var bst = new BalancedBST();
             bst.CreateFromArray(arr);
             var ethalon = new int[] {8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15};
-            Assert.AreEqual(ethalon.Length, bst.BSTArray.Length);
-            for(var i = 0; i < bst.BSTArray.Length; i++)
+            Assert.AreEqual(ethalon.Length, bst.BSTKeysArray.Length);
+            for(var i = 0; i < bst.BSTKeysArray.Length; i++)
             {
-                Assert.AreEqual(ethalon[i], bst.BSTArray[i]);
+                Assert.AreEqual(ethalon[i], bst.BSTKeysArray[i]);
             }
         }
 
@@ -26,10 +26,10 @@ namespace Tests
             var bst = new BalancedBST();
             bst.CreateFromArray(arr);
             var ethalon = new int[] {8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15};
-            Assert.AreEqual(ethalon.Length, bst.BSTArray.Length);
-            for(var i = 0; i < bst.BSTArray.Length; i++)
+            Assert.AreEqual(ethalon.Length, bst.BSTKeysArray.Length);
+            for(var i = 0; i < bst.BSTKeysArray.Length; i++)
             {
-                Assert.AreEqual(ethalon[i], bst.BSTArray[i]);
+                Assert.AreEqual(ethalon[i], bst.BSTKeysArray[i]);
             }
             bst.GenerateTree();
             CheckNodes(bst.Root);
@@ -57,10 +57,10 @@ namespace Tests
             var bst = new BalancedBST();
             bst.CreateFromArray(arr);
             var ethalon = new int[] {8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15};
-            Assert.AreEqual(ethalon.Length, bst.BSTArray.Length);
-            for(var i = 0; i < bst.BSTArray.Length; i++)
+            Assert.AreEqual(ethalon.Length, bst.BSTKeysArray.Length);
+            for(var i = 0; i < bst.BSTKeysArray.Length; i++)
             {
-                Assert.AreEqual(ethalon[i], bst.BSTArray[i]);
+                Assert.AreEqual(ethalon[i], bst.BSTKeysArray[i]);
             }
             bst.GenerateTree();
             CheckNodes(bst.Root);

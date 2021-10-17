@@ -137,7 +137,7 @@ namespace AlgorithmsDataStructures
             return counter; // здесь будет ваш код подсчёта количества элементов в списке
         }
 
-        List<Node<T>> GetAll() // выдать все элементы упорядоченного списка в виде стандартного списка
+        List<Node<T>> GetAll()
         {
             List<Node<T>> resultListOfNodes = new List<Node<T>>();
             Node<T> node = head;

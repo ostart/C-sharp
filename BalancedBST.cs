@@ -4,11 +4,11 @@ namespace AlgorithmsDataStructures2
 {
     public class BSTNode
       {
-        internal int NodeKey; // ключ узла
-        internal BSTNode Parent; // родитель или null для корня
-        internal BSTNode LeftChild; // левый потомок
-        internal BSTNode RightChild; // правый потомок	
-        internal int     Level; // глубина узла
+        internal int NodeKey;
+        internal BSTNode Parent; // null для корня
+        internal BSTNode LeftChild;
+        internal BSTNode RightChild;
+        internal int NodeLevel;
 	
         public BSTNode(int key, BSTNode parent)
          {
@@ -24,7 +24,7 @@ namespace AlgorithmsDataStructures2
 	{
 		public BSTNode Root;
 		
-		public int [] BSTArray; // временный массив для ключей дерева
+		public int [] BSTKeysArray;
 		
 		public BalancedBST() 
 		{ 
@@ -32,17 +32,15 @@ namespace AlgorithmsDataStructures2
 		}
 		
 		public void CreateFromArray(int[] a) 
-		{  
-			// создаём массив дерева BSTArray из заданного
+		{
 			Array.Sort(a);
             var result = new int[a.Length];
             ParseArray(a, result, -1, true);
-            BSTArray = result;
+            BSTKeysArray = result;
 		}			
 			
 		public void GenerateTree() 
-		{  
-			// создаём дерево с нуля из массива BSTArray
+		{
 			Root = GenerateNode(null, null, false, 1);
 		}
 
@@ -50,16 +48,16 @@ namespace AlgorithmsDataStructures2
         {
             if(parentIndex == null)
             {
-                var root = new BSTNode(BSTArray[0], null);
-                root.Level = level;
+                var root = new BSTNode(BSTKeysArray[0], null);
+                root.NodeLevel = level;
                 root.LeftChild = GenerateNode(0, root, false, level+1);
                 root.RightChild = GenerateNode(0, root, true, level+1);
                 return root;
             }
             var currentIndex = isRight ? 2*(int)parentIndex + 2 : 2*(int)parentIndex + 1;
-            if(currentIndex >= BSTArray.Length) return null;
-            var node = new BSTNode(BSTArray[currentIndex], parentNode);
-            node.Level = level;
+            if(currentIndex >= BSTKeysArray.Length) return null;
+            var node = new BSTNode(BSTKeysArray[currentIndex], parentNode);
+            node.NodeLevel = level;
             node.LeftChild = GenerateNode(currentIndex, node, false, level+1);
             node.RightChild = GenerateNode(currentIndex, node, true, level+1);
             return node;

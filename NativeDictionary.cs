@@ -27,8 +27,6 @@ namespace AlgorithmsDataStructures
 
         public bool IsKey(string key)
         {
-            // возвращает true если ключ имеется,
-            // иначе false
             var index = HashFun(key);
             return slots[index] == key;
         }
@@ -44,8 +42,6 @@ namespace AlgorithmsDataStructures
 
         public T Get(string key)
         {
-            // возвращает value для key, 
-            // или null если ключ не найден
             var index = HashFun(key);
             return slots[index] == key ? values[index] : default(T);
         }
